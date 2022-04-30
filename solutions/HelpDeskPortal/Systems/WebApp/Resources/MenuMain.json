@@ -1,0 +1,38 @@
+[
+  {
+    "children": [],
+    "icon": "dashboard.svg",
+    "text": "Dashboard",
+    "uiComponentName": "CmpHome"
+  },
+  {
+    "children": [],
+    "icon": "ticket.svg",
+    "text": "Tickets",
+    "uiComponentName": "CmpTickets"
+  },
+  {
+    "children": [],
+    "icon": "user.svg",
+    "text": "Usuarios",
+    "uiComponentName": "CmpUsers"
+  },
+  {
+    "icon": "settings.svg",
+    "text": "Configuración",
+    "children": [
+      {
+        "children": [],
+        "icon": "department.svg",
+        "text": "Departamentos",
+        "uiComponentName": "CmpDepartments"
+      },
+      {
+        "children": [],
+        "icon": "category.svg",
+        "text": "Categorías de Ticket",
+        "uiComponentName": "CmpTicketCategories"
+      }
+    ]
+  }
+]

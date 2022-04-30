@@ -1,0 +1,22 @@
+{
+  "systems": [
+    {
+      "name": "HelpDeskService",
+      "type": "RestApi",
+      "x": 604,
+      "y": 264
+    },
+    {
+      "name": "WebApp",
+      "type": "WebFrontend",
+      "x": 306,
+      "y": 263
+    }
+  ],
+  "references": [
+    {
+      "fromSystemName": "WebApp",
+      "toSystemName": "HelpDeskService"
+    }
+  ]
+}

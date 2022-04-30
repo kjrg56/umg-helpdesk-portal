@@ -1,0 +1,39 @@
+{
+  "algorithm": {
+    "parameters": [],
+    "statements": [
+      {
+        "command": "LoadResource",
+        "expressionPath": "\"/CultureSp.json\"",
+        "variableName": "culture"
+      },
+      {
+        "command": "LoadResource",
+        "expressionPath": "\"/MenuMain.json\"",
+        "variableName": "menu"
+      },
+      {
+        "command": "Launch",
+        "expressionCulture": "^culture",
+        "expressionIcon": "\"helpdesk-logo.png\"",
+        "expressionMainMenu": "^menu",
+        "expressionSubTitle": "null",
+        "expressionTitle": "\"Help Desk\"",
+        "expressionToolsMenu": "null",
+        "search": "disable",
+        "uiComponentName": "CmpHome"
+      }
+    ],
+    "typeReturn": "any",
+    "variables": [
+      {
+        "name": "culture",
+        "type": "Culture"
+      },
+      {
+        "name": "menu",
+        "type": "list(MenuItem)"
+      }
+    ]
+  }
+}

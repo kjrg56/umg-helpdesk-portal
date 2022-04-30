@@ -1,0 +1,20 @@
+{
+  "eventsAndFunctions": [],
+  "model": [],
+  "root": {
+    "children": [
+      {
+        "name": "label1",
+        "widget": "Label"
+      }
+    ],
+    "cssClass": "blz-area-default",
+    "icon": "ticket.svg",
+    "layout": "container",
+    "title": "Tickets"
+  },
+  "routing": {
+    "path": "/tickets"
+  },
+  "unused": []
+}

@@ -1,0 +1,20 @@
+{
+  "eventsAndFunctions": [],
+  "model": [],
+  "root": {
+    "children": [
+      {
+        "name": "label1",
+        "widget": "Label"
+      }
+    ],
+    "cssClass": "blz-area-default",
+    "icon": "user.svg",
+    "layout": "container",
+    "title": "Usuarios"
+  },
+  "routing": {
+    "path": "/users"
+  },
+  "unused": []
+}

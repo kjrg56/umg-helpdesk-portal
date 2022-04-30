@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "systemName": "WebApp",
+      "action": "build",
+      "buildPort": 8080,
+      "accessTokenSimulation": {
+        "payload": {
+          "sub": "0000",
+          "given_name": "John",
+          "family_name": "Doe"
+        },
+        "secret": "12345",
+        "algorithm": "HMAC-SHA256"
+      }
+    }
+  ]
+}
