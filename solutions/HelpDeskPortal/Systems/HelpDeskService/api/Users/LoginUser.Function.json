@@ -1,0 +1,48 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "args",
+        "type": "ArgsLoginUser"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "User",
+    "variables": []
+  },
+  "routing": {
+    "method": "GET",
+    "parameters": [
+      {
+        "bind": "args.username",
+        "in": "Query",
+        "name": "username"
+      },
+      {
+        "bind": "args.password",
+        "in": "Query",
+        "name": "password"
+      }
+    ],
+    "path": "/users/login",
+    "remarks": "Logs user into the system",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK",
+        "typeName": "User"
+      },
+      {
+        "httpStatus": "400",
+        "remarks": "Invalid"
+      },
+      {
+        "httpStatus": "404",
+        "remarks": "Not found"
+      }
+    ],
+    "tags": [
+      "Users"
+    ]
+  }
+}

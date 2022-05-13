@@ -1,0 +1,39 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "args",
+        "type": "ArgsListUsers"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "list(User)",
+    "variables": []
+  },
+  "routing": {
+    "method": "GET",
+    "parameters": [
+      {
+        "bind": "args.offset",
+        "in": "Query",
+        "name": "offset"
+      },
+      {
+        "bind": "args.limit",
+        "in": "Query",
+        "name": "limit"
+      }
+    ],
+    "path": "/users",
+    "remarks": "List users",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK"
+      }
+    ],
+    "tags": [
+      "Users"
+    ]
+  }
+}

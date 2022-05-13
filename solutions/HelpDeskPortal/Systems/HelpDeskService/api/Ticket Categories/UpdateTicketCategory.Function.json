@@ -1,0 +1,53 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "ticketCategoryUpdate",
+        "type": "TicketCategoryUpdate"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "TicketCategory",
+    "variables": []
+  },
+  "routing": {
+    "method": "PUT",
+    "parameters": [
+      {
+        "bind": "id",
+        "in": "Path",
+        "name": "id",
+        "remarks": "name that need to be updated"
+      },
+      {
+        "bind": "ticketCategoryUpdate",
+        "in": "Body",
+        "name": "body"
+      }
+    ],
+    "path": "/ticket-categories/{id}",
+    "remarks": "Updated TicketCategory",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK",
+        "typeName": "TicketCategory"
+      },
+      {
+        "httpStatus": "400",
+        "remarks": "Invalid"
+      },
+      {
+        "httpStatus": "404",
+        "remarks": "Not found"
+      }
+    ],
+    "tags": [
+      "Ticket Categories"
+    ]
+  }
+}

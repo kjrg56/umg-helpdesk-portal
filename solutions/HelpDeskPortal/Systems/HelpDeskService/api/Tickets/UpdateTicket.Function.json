@@ -1,0 +1,53 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "ticketUpdate",
+        "type": "TicketUpdate"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "Ticket",
+    "variables": []
+  },
+  "routing": {
+    "method": "PUT",
+    "parameters": [
+      {
+        "bind": "id",
+        "in": "Path",
+        "name": "id",
+        "remarks": "name that need to be updated"
+      },
+      {
+        "bind": "ticketUpdate",
+        "in": "Body",
+        "name": "body"
+      }
+    ],
+    "path": "/tickets/{id}",
+    "remarks": "Updated Ticket",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK",
+        "typeName": "Ticket"
+      },
+      {
+        "httpStatus": "400",
+        "remarks": "Invalid"
+      },
+      {
+        "httpStatus": "404",
+        "remarks": "Not found"
+      }
+    ],
+    "tags": [
+      "Tickets"
+    ]
+  }
+}

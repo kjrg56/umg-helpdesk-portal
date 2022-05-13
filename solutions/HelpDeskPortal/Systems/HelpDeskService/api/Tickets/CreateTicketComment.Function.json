@@ -1,0 +1,49 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "ticketId",
+        "type": "string"
+      },
+      {
+        "name": "ticketCommentCreation",
+        "type": "TicketCommentCreation"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "TicketComment",
+    "variables": []
+  },
+  "routing": {
+    "method": "POST",
+    "parameters": [
+      {
+        "bind": "ticketId",
+        "in": "Path",
+        "name": "ticketId",
+        "remarks": "The name that needs to be fetched. Use user1 for testing. "
+      },
+      {
+        "bind": "ticketCommentCreation",
+        "in": "Body",
+        "name": "body"
+      }
+    ],
+    "path": "/tickets/{ticketId}/comments",
+    "remarks": "Create ticket comment",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK",
+        "typeName": "TicketComment"
+      },
+      {
+        "httpStatus": "404",
+        "remarks": "Not found"
+      }
+    ],
+    "tags": [
+      "Tickets"
+    ]
+  }
+}

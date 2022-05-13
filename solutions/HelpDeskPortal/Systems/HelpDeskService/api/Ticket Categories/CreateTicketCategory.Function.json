@@ -1,0 +1,39 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "ticketCategoryCreation",
+        "type": "TicketCategoryCreation"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "TicketCategory",
+    "variables": []
+  },
+  "routing": {
+    "method": "POST",
+    "parameters": [
+      {
+        "bind": "ticketCategoryCreation",
+        "in": "Body",
+        "name": "body"
+      }
+    ],
+    "path": "/ticket-categories",
+    "remarks": "Create Ticket Category",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK",
+        "typeName": "TicketCategory"
+      },
+      {
+        "httpStatus": "404",
+        "remarks": "Not found"
+      }
+    ],
+    "tags": [
+      "Ticket Categories"
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "ticketId",
+        "type": "string"
+      },
+      {
+        "name": "commentId",
+        "type": "string"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "any",
+    "variables": []
+  },
+  "routing": {
+    "method": "DELETE",
+    "parameters": [
+      {
+        "bind": "ticketId",
+        "in": "Path",
+        "name": "ticketId"
+      },
+      {
+        "bind": "commentId",
+        "in": "Path",
+        "name": "commentId"
+      }
+    ],
+    "path": "/tickets/{ticketId}/comments/{commentId}",
+    "remarks": "Delete Ticket Comment",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK"
+      },
+      {
+        "httpStatus": "400",
+        "remarks": "Invalid"
+      },
+      {
+        "httpStatus": "404",
+        "remarks": "Not found"
+      }
+    ],
+    "tags": [
+      "Tickets"
+    ]
+  }
+}

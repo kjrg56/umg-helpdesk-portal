@@ -1,0 +1,57 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "userId",
+        "type": "string"
+      },
+      {
+        "name": "args",
+        "type": "ArgsListNotificationsByUserId"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "list(Notification)",
+    "variables": []
+  },
+  "routing": {
+    "method": "GET",
+    "parameters": [
+      {
+        "bind": "userId",
+        "in": "Path",
+        "name": "userId",
+        "remarks": "The name that needs to be fetched. Use user1 for testing. "
+      },
+      {
+        "bind": "args.offset",
+        "in": "Query",
+        "name": "offset"
+      },
+      {
+        "bind": "args.limit",
+        "in": "Query",
+        "name": "limit"
+      }
+    ],
+    "path": "/users/{userId}/notifications",
+    "remarks": "List notifications by user",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK"
+      },
+      {
+        "httpStatus": "400",
+        "remarks": "Invalid"
+      },
+      {
+        "httpStatus": "404",
+        "remarks": "Not found"
+      }
+    ],
+    "tags": [
+      "Users"
+    ]
+  }
+}

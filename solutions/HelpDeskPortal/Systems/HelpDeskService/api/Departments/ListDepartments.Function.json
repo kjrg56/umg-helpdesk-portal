@@ -1,0 +1,39 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "args",
+        "type": "ArgsListDepartments"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "list(Department)",
+    "variables": []
+  },
+  "routing": {
+    "method": "GET",
+    "parameters": [
+      {
+        "bind": "args.offset",
+        "in": "Query",
+        "name": "offset"
+      },
+      {
+        "bind": "args.limit",
+        "in": "Query",
+        "name": "limit"
+      }
+    ],
+    "path": "/departments",
+    "remarks": "List department",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK"
+      }
+    ],
+    "tags": [
+      "Departments"
+    ]
+  }
+}

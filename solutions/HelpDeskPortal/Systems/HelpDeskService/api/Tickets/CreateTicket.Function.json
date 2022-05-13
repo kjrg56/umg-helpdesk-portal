@@ -1,0 +1,35 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "ticketCreation",
+        "type": "TicketCreation"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "Ticket",
+    "variables": []
+  },
+  "routing": {
+    "method": "POST",
+    "parameters": [
+      {
+        "bind": "ticketCreation",
+        "in": "Body",
+        "name": "body"
+      }
+    ],
+    "path": "/tickets",
+    "remarks": "Create ticket",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK",
+        "typeName": "Ticket"
+      }
+    ],
+    "tags": [
+      "Tickets"
+    ]
+  }
+}

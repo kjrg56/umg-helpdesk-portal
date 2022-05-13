@@ -1,0 +1,39 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "args",
+        "type": "ArgsListTickets"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "list(Ticket)",
+    "variables": []
+  },
+  "routing": {
+    "method": "GET",
+    "parameters": [
+      {
+        "bind": "args.offset",
+        "in": "Query",
+        "name": "offset"
+      },
+      {
+        "bind": "args.limit",
+        "in": "Query",
+        "name": "limit"
+      }
+    ],
+    "path": "/tickets",
+    "remarks": "List tickets",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK"
+      }
+    ],
+    "tags": [
+      "Tickets"
+    ]
+  }
+}

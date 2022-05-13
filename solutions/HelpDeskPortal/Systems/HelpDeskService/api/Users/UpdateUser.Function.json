@@ -1,0 +1,53 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "userUpdate",
+        "type": "UserUpdate"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "User",
+    "variables": []
+  },
+  "routing": {
+    "method": "PUT",
+    "parameters": [
+      {
+        "bind": "id",
+        "in": "Path",
+        "name": "id",
+        "remarks": "name that need to be updated"
+      },
+      {
+        "bind": "userUpdate",
+        "in": "Body",
+        "name": "body"
+      }
+    ],
+    "path": "/users/{id}",
+    "remarks": "Updated user",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK",
+        "typeName": "User"
+      },
+      {
+        "httpStatus": "400",
+        "remarks": "Invalid"
+      },
+      {
+        "httpStatus": "404",
+        "remarks": "Not found"
+      }
+    ],
+    "tags": [
+      "Users"
+    ]
+  }
+}

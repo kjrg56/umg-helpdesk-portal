@@ -1,0 +1,57 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "ticketId",
+        "type": "string"
+      },
+      {
+        "name": "args",
+        "type": "ArgsListTicketCommentsById"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "list(TicketComment)",
+    "variables": []
+  },
+  "routing": {
+    "method": "GET",
+    "parameters": [
+      {
+        "bind": "ticketId",
+        "in": "Path",
+        "name": "ticketId",
+        "remarks": "The name that needs to be fetched. Use user1 for testing. "
+      },
+      {
+        "bind": "args.offset",
+        "in": "Query",
+        "name": "offset"
+      },
+      {
+        "bind": "args.limit",
+        "in": "Query",
+        "name": "limit"
+      }
+    ],
+    "path": "/tickets/{ticketId}/comments",
+    "remarks": "List ticket comments",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK"
+      },
+      {
+        "httpStatus": "400",
+        "remarks": "Invalid"
+      },
+      {
+        "httpStatus": "404",
+        "remarks": "Not found"
+      }
+    ],
+    "tags": [
+      "Tickets"
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "id",
+        "type": "string"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "User",
+    "variables": []
+  },
+  "routing": {
+    "method": "GET",
+    "parameters": [
+      {
+        "bind": "id",
+        "in": "Path",
+        "name": "id",
+        "remarks": "The name that needs to be fetched. Use user1 for testing. "
+      }
+    ],
+    "path": "/users/{id}",
+    "remarks": "Get user by id",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK",
+        "typeName": "User"
+      },
+      {
+        "httpStatus": "400",
+        "remarks": "Invalid"
+      },
+      {
+        "httpStatus": "404",
+        "remarks": "Not found"
+      }
+    ],
+    "tags": [
+      "Users"
+    ]
+  }
+}
