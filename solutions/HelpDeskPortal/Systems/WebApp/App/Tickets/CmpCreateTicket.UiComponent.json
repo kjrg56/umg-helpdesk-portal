@@ -1,0 +1,108 @@
+{
+  "eventsAndFunctions": [
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "HelpDeskService.ListTicketCategories({})",
+            "variableName": "list"
+          },
+          {
+            "command": "Load",
+            "expression": "Map(list, [id, name])",
+            "widgetName": "category"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "list",
+            "type": "list(HelpDeskService.TicketCategory)"
+          }
+        ]
+      },
+      "name": "main_init"
+    },
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "GetValue",
+            "variableName": "nombre",
+            "widgetName": "name"
+          },
+          {
+            "command": "GetValue",
+            "variableName": "descripcion",
+            "widgetName": "descripcion"
+          },
+          {
+            "command": "Set",
+            "expression": "{}",
+            "variableName": "ticket"
+          },
+          {
+            "command": "Set",
+            "expression": "nombre",
+            "variableName": "ticket.name"
+          },
+          {
+            "command": "Set",
+            "expression": "descripcion",
+            "variableName": "ticket.description"
+          },
+          {
+            "command": "Execute",
+            "expression": "HelpDeskService.CreateTicket(ticket)"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "nombre",
+            "type": "string"
+          },
+          {
+            "name": "descripcion",
+            "type": "string"
+          },
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.TicketCreation"
+          }
+        ]
+      },
+      "name": "main_submit"
+    }
+  ],
+  "model": [],
+  "root": {
+    "children": [
+      {
+        "label": "Nombre",
+        "name": "name",
+        "widget": "TextBox"
+      },
+      {
+        "dataFormat": "key-value",
+        "label": "Categoria",
+        "mandatory": true,
+        "mode": "single",
+        "name": "category",
+        "widget": "ComboBox"
+      },
+      {
+        "label": "Descripcion",
+        "name": "descripcion",
+        "widget": "TextArea"
+      }
+    ],
+    "cssClass": "blz-area-default",
+    "layout": "container"
+  },
+  "routing": null,
+  "unused": []
+}

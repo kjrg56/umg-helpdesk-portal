@@ -1,11 +1,207 @@
 {
-  "eventsAndFunctions": [],
+  "eventsAndFunctions": [
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "Refresh",
+            "widgetName": "grid1"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": []
+      },
+      "name": "main_init"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "args",
+            "type": "ArgsLoadRecords"
+          }
+        ],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "{}",
+            "variableName": "ticketArgs"
+          },
+          {
+            "command": "Set",
+            "expression": "args.offset",
+            "variableName": "ticketArgs.offset"
+          },
+          {
+            "command": "Set",
+            "expression": "args.limit",
+            "variableName": "ticketArgs.limit"
+          },
+          {
+            "command": "Set",
+            "expression": "HelpDeskService.ListTickets(ticketArgs)",
+            "variableName": "listado"
+          },
+          {
+            "command": "Return",
+            "expression": "listado"
+          }
+        ],
+        "typeReturn": "list(any)",
+        "variables": [
+          {
+            "name": "ticketArgs",
+            "type": "HelpDeskService.ArgsListTickets"
+          },
+          {
+            "name": "listado",
+            "type": "list(HelpDeskService.Ticket)"
+          }
+        ]
+      },
+      "name": "grid1_loadRecords"
+    },
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "buttons": "ok-cancel",
+            "command": "Open",
+            "expressionIcon": "null",
+            "expressionStartModel": "{}",
+            "expressionTitle": "\"Crear Ticket\"",
+            "mode": "window",
+            "size": "default",
+            "uiComponentName": "CmpCreateTicket"
+          },
+          {
+            "children": [
+              {
+                "command": "CloseCurrent"
+              },
+              {
+                "command": "Refresh",
+                "widgetName": "grid1"
+              }
+            ],
+            "command": "OnOk",
+            "variableNameOpenedModel": "model"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "model",
+            "type": "any"
+          }
+        ]
+      },
+      "name": "btnGuardar_click"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "recordRef",
+            "type": "string"
+          },
+          {
+            "name": "arg",
+            "type": "string"
+          }
+        ],
+        "statements": [
+          {
+            "command": "ReadRecord",
+            "expressionRecordRef": "recordRef",
+            "variableName": "ticket",
+            "widgetName": "grid1"
+          },
+          {
+            "buttons": "ok-cancel",
+            "command": "Open",
+            "expressionIcon": "null",
+            "expressionStartModel": "{ticket: ticket}",
+            "expressionTitle": "\"Editar Ticket\"",
+            "mode": "window",
+            "size": "default",
+            "uiComponentName": "CmpUpdateTicket"
+          },
+          {
+            "children": [
+              {
+                "command": "Refresh",
+                "widgetName": "grid1"
+              },
+              {
+                "command": "CloseCurrent"
+              }
+            ],
+            "command": "OnOk",
+            "variableNameOpenedModel": "model"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.Ticket"
+          },
+          {
+            "name": "model",
+            "type": "any"
+          }
+        ]
+      },
+      "name": "grid1_handlerRecordAction_actualizar"
+    }
+  ],
   "model": [],
   "root": {
     "children": [
       {
-        "name": "label1",
-        "widget": "Label"
+        "color": "primary",
+        "icon": "add.svg",
+        "name": "btnGuardar",
+        "text": "Crear",
+        "widget": "Button"
+      },
+      {
+        "columns": [
+          {
+            "align": "left",
+            "bindText": "id",
+            "header": "Id",
+            "key": "id"
+          },
+          {
+            "align": "left",
+            "bindText": "name",
+            "header": "Nombre",
+            "key": "name"
+          }
+        ],
+        "name": "grid1",
+        "pageSize": 10,
+        "recordActions": [
+          {
+            "contextMenu": true,
+            "icon": "edit.svg",
+            "key": "actualizar",
+            "text": "Editar"
+          },
+          {
+            "contextMenu": true,
+            "icon": "remove.svg",
+            "key": "Eliminar",
+            "text": "Eliminar"
+          }
+        ],
+        "typeName": "HelpDeskService.Ticket",
+        "widget": "Grid",
+        "withPaging": true
       }
     ],
     "cssClass": "blz-area-default",
