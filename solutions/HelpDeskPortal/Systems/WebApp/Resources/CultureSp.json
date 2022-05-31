@@ -137,6 +137,38 @@
     {
       "key": "Apply",
       "value": "Apply"
+    },
+    {
+      "key": "Pending",
+      "value": "Pendiente"
+    },
+    {
+      "key": "Assigned",
+      "value": "Asignado"
+    },
+    {
+      "key": "InProgress",
+      "value": "En Progreso"
+    },
+    {
+      "key": "Closed",
+      "value": "Cerrado"
+    },
+    {
+      "key": "Manager",
+      "value": "Gerente"
+    },
+    {
+      "key": "Worker",
+      "value": "Colaborador"
+    },
+    {
+      "key": "Admin",
+      "value": "Administrador"
+    },
+    {
+      "key": "Technician",
+      "value": "Técnico"
     }
   ]
 }

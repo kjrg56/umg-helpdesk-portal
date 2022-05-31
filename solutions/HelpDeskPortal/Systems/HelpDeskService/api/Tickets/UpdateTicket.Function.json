@@ -15,7 +15,7 @@
     "variables": []
   },
   "routing": {
-    "method": "PUT",
+    "method": "PATCH",
     "parameters": [
       {
         "bind": "id",
@@ -47,7 +47,7 @@
       }
     ],
     "tags": [
-      "Tickets"
+      "tickets"
     ]
   }
 }

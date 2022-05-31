@@ -2,40 +2,30 @@
   "algorithm": {
     "parameters": [
       {
-        "name": "id",
+        "name": "ticketId",
         "type": "string"
-      },
-      {
-        "name": "userUpdate",
-        "type": "UserUpdate"
       }
     ],
     "statements": [],
-    "typeReturn": "User",
+    "typeReturn": "Ticket",
     "variables": []
   },
   "routing": {
-    "method": "PUT",
+    "method": "POST",
     "parameters": [
       {
-        "bind": "id",
+        "bind": "ticketId",
         "in": "Path",
-        "name": "id",
-        "remarks": "name that need to be updated"
-      },
-      {
-        "bind": "userUpdate",
-        "in": "Body",
-        "name": "body"
+        "name": "ticketId"
       }
     ],
-    "path": "/users/{id}",
-    "remarks": "Updated user",
+    "path": "/tickets/{ticketId}/close",
+    "remarks": "Close ticket",
     "responses": [
       {
         "httpStatus": "202",
         "remarks": "OK",
-        "typeName": "User"
+        "typeName": "Ticket"
       },
       {
         "httpStatus": "400",
@@ -47,7 +37,7 @@
       }
     ],
     "tags": [
-      "users"
+      "tickets"
     ]
   }
 }

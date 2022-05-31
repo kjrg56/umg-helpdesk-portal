@@ -26,26 +26,31 @@
           {
             "command": "Set",
             "expression": "{}",
-            "variableName": "ticketArgs"
+            "variableName": "ticketArgs",
+            "widgetName": "mainContainer"
           },
           {
             "command": "Set",
             "expression": "args.offset",
-            "variableName": "ticketArgs.offset"
+            "variableName": "ticketArgs.offset",
+            "widgetName": "mainContainer"
           },
           {
             "command": "Set",
             "expression": "args.limit",
-            "variableName": "ticketArgs.limit"
+            "variableName": "ticketArgs.limit",
+            "widgetName": "mainContainer"
           },
           {
             "command": "Set",
             "expression": "HelpDeskService.ListTickets(ticketArgs)",
-            "variableName": "listado"
+            "variableName": "listado",
+            "widgetName": "mainContainer"
           },
           {
             "command": "Return",
-            "expression": "listado"
+            "expression": "listado",
+            "widgetName": "mainContainer"
           }
         ],
         "typeReturn": "list(any)",
@@ -74,12 +79,14 @@
             "expressionTitle": "\"Crear Ticket\"",
             "mode": "window",
             "size": "default",
-            "uiComponentName": "CmpCreateTicket"
+            "uiComponentName": "CmpCreateTicket",
+            "widgetName": "mainContainer"
           },
           {
             "children": [
               {
-                "command": "CloseCurrent"
+                "command": "CloseCurrent",
+                "widgetName": "mainContainer"
               },
               {
                 "command": "Refresh",
@@ -87,7 +94,8 @@
               }
             ],
             "command": "OnOk",
-            "variableNameOpenedModel": "model"
+            "variableNameOpenedModel": "model",
+            "widgetName": "mainContainer"
           }
         ],
         "typeReturn": "any",
@@ -127,7 +135,8 @@
             "expressionTitle": "\"Editar Ticket\"",
             "mode": "window",
             "size": "default",
-            "uiComponentName": "CmpUpdateTicket"
+            "uiComponentName": "CmpUpdateTicket",
+            "widgetName": "mainContainer"
           },
           {
             "children": [
@@ -136,11 +145,13 @@
                 "widgetName": "grid1"
               },
               {
-                "command": "CloseCurrent"
+                "command": "CloseCurrent",
+                "widgetName": "mainContainer"
               }
             ],
             "command": "OnOk",
-            "variableNameOpenedModel": "model"
+            "variableNameOpenedModel": "model",
+            "widgetName": "mainContainer"
           }
         ],
         "typeReturn": "any",
@@ -156,57 +167,263 @@
         ]
       },
       "name": "grid1_handlerRecordAction_actualizar"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "recordData",
+            "type": "any"
+          }
+        ],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "{}",
+            "variableName": "column",
+            "widgetName": "mainContainer"
+          },
+          {
+            "command": "Set",
+            "expression": "\"[[\" + recordData.status + \"]]\"",
+            "variableName": "column.text",
+            "widgetName": "mainContainer"
+          },
+          {
+            "command": "Return",
+            "expression": "column",
+            "widgetName": "mainContainer"
+          }
+        ],
+        "typeReturn": "RenderColumnResult",
+        "variables": [
+          {
+            "name": "column",
+            "type": "RenderColumnResult"
+          }
+        ]
+      },
+      "name": "grid1_renderColumn_status"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "recordRef",
+            "type": "string"
+          },
+          {
+            "name": "arg",
+            "type": "string"
+          }
+        ],
+        "statements": [
+          {
+            "command": "ReadRecord",
+            "expressionRecordRef": "recordRef",
+            "variableName": "ticket",
+            "widgetName": "grid1"
+          },
+          {
+            "command": "Navigate",
+            "expressionStartModel": "{ticket: ticket, ticketId: ticket.id}",
+            "uiComponentName": "CmpTicketDetail"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.Ticket"
+          }
+        ]
+      },
+      "name": "grid1_handlerRecordAction_view"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "recordData",
+            "type": "any"
+          }
+        ],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "recordData",
+            "variableName": "ticket"
+          },
+          {
+            "command": "Set",
+            "expression": "{}",
+            "variableName": "column"
+          },
+          {
+            "children": [
+              {
+                "command": "Set",
+                "expression": "ticket.userAssigned.fullName",
+                "variableName": "column.text"
+              }
+            ],
+            "command": "If",
+            "expression": "ticket.userAssigned != null"
+          },
+          {
+            "command": "Return",
+            "expression": "column"
+          }
+        ],
+        "typeReturn": "RenderColumnResult",
+        "variables": [
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.Ticket"
+          },
+          {
+            "name": "column",
+            "type": "RenderColumnResult"
+          }
+        ]
+      },
+      "name": "grid1_renderColumn_asignadoA"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "recordData",
+            "type": "any"
+          }
+        ],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "recordData",
+            "variableName": "ticket"
+          },
+          {
+            "command": "Return",
+            "expression": "ticket.status != \"Closed\""
+          }
+        ],
+        "typeReturn": "boolean",
+        "variables": [
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.Ticket"
+          }
+        ]
+      },
+      "name": "grid1_visibilityRecordAction_actualizar"
     }
   ],
   "model": [],
   "root": {
     "children": [
       {
-        "color": "primary",
-        "icon": "add.svg",
-        "name": "btnGuardar",
-        "text": "Crear",
-        "widget": "Button"
-      },
-      {
-        "columns": [
+        "children": [
           {
-            "align": "left",
-            "bindText": "id",
-            "header": "Id",
-            "key": "id"
+            "color": "primary",
+            "icon": "add.svg",
+            "name": "btnGuardar",
+            "text": "Crear",
+            "widget": "Button"
           },
           {
-            "align": "left",
-            "bindText": "name",
-            "header": "Nombre",
-            "key": "name"
+            "actions": [],
+            "columns": [
+              {
+                "align": "center",
+                "bindText": "id",
+                "header": "Id",
+                "key": "id",
+                "size": "1"
+              },
+              {
+                "align": "left",
+                "bindText": "name",
+                "bold": true,
+                "color": "primary",
+                "header": "Nombre",
+                "key": "name",
+                "recordActionKey": "view",
+                "size": "2"
+              },
+              {
+                "align": "left",
+                "bindText": "category.name",
+                "header": "Categoria",
+                "key": "category",
+                "size": "1"
+              },
+              {
+                "align": "left",
+                "bindText": "status",
+                "header": "Estado",
+                "key": "status",
+                "size": "1"
+              },
+              {
+                "align": "left",
+                "bindText": "userCreated.fullName",
+                "header": "Creado Por",
+                "key": "createdBy",
+                "size": "1"
+              },
+              {
+                "align": "left",
+                "bindText": "creationDate",
+                "format": "DateTime",
+                "header": "Fecha de Creacion",
+                "key": "creationDate",
+                "size": "1"
+              },
+              {
+                "align": "left",
+                "header": "Asignado a",
+                "key": "asignadoA",
+                "size": "1"
+              },
+              {
+                "align": "left",
+                "bindText": "assignationDate",
+                "format": "DateTime",
+                "header": "Fecha de Asignacion",
+                "key": "fechaAsignacion",
+                "size": "1"
+              }
+            ],
+            "disableSelection": true,
+            "name": "grid1",
+            "pageSize": 10,
+            "recordActions": [
+              {
+                "hidden": true,
+                "icon": "view.svg",
+                "key": "view",
+                "text": "Ver"
+              },
+              {
+                "icon": "edit.svg",
+                "key": "actualizar",
+                "text": "Editar"
+              }
+            ],
+            "typeName": "HelpDeskService.Ticket",
+            "widget": "Grid",
+            "withPaging": true
           }
         ],
-        "name": "grid1",
-        "pageSize": 10,
-        "recordActions": [
-          {
-            "contextMenu": true,
-            "icon": "edit.svg",
-            "key": "actualizar",
-            "text": "Editar"
-          },
-          {
-            "contextMenu": true,
-            "icon": "remove.svg",
-            "key": "Eliminar",
-            "text": "Eliminar"
-          }
-        ],
-        "typeName": "HelpDeskService.Ticket",
-        "widget": "Grid",
-        "withPaging": true
+        "cssClass": "blz-padding-top-large blz-padding-right-large blz-padding-left-large blz-padding-bottom-large",
+        "layout": "container"
       }
     ],
-    "cssClass": "blz-area-default",
+    "cssClass": "blz-padding-right-large blz-padding-left-large blz-area-default",
     "icon": "ticket.svg",
     "layout": "container",
+    "name": "mainContainer",
     "title": "Tickets"
   },
   "routing": {

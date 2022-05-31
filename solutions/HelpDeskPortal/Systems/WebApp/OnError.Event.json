@@ -10,41 +10,11 @@
       {
         "children": [
           {
-            "command": "ConsoleLog",
-            "expression": "^err"
-          },
-          {
-            "command": "AlertMessage",
-            "expressionMessage": "\"An unexpected error ocurred\"",
-            "expressionTitle": "\"Error\"",
-            "severity": "error"
+            "command": "Logout"
           }
         ],
         "command": "If",
-        "expression": "IsNull(^err.code)"
-      },
-      {
-        "children": [
-          {
-            "command": "AlertMessage",
-            "expressionMessage": "^err.raw",
-            "expressionTitle": "^err.code",
-            "severity": "error"
-          }
-        ],
-        "command": "ElseIf",
-        "expression": "IsNull(^err.data)"
-      },
-      {
-        "children": [
-          {
-            "command": "AlertMessage",
-            "expressionMessage": "JsonStringify(^err.data)",
-            "expressionTitle": "^err.code",
-            "severity": "error"
-          }
-        ],
-        "command": "Else"
+        "expression": "^err.code == \"Unauthorized\""
       }
     ],
     "typeReturn": "any",

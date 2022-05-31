@@ -5,6 +5,45 @@
         "parameters": [],
         "statements": [
           {
+            "command": "Set",
+            "expression": "HelpDeskService.ListTicketCategories({})",
+            "variableName": "listCategories"
+          },
+          {
+            "command": "Set",
+            "expression": "HelpDeskService.ListUsers({})",
+            "variableName": "listUsers"
+          },
+          {
+            "command": "Load",
+            "expression": "Map(listCategories, [id, name])",
+            "widgetName": "cmbCategory"
+          },
+          {
+            "command": "Load",
+            "expression": "Map(listUsers, [id, fullName])",
+            "widgetName": "cmbAssignedUser"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "listCategories",
+            "type": "list(HelpDeskService.TicketCategory)"
+          },
+          {
+            "name": "listUsers",
+            "type": "list(HelpDeskService.User)"
+          }
+        ]
+      },
+      "name": "main_init"
+    },
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
             "command": "ReadModel",
             "modelVariableName": "ticket",
             "variableName": "ticket"
@@ -12,12 +51,22 @@
           {
             "command": "GetValue",
             "variableName": "nombre",
-            "widgetName": "name"
+            "widgetName": "txtName"
           },
           {
             "command": "GetValue",
             "variableName": "descripcion",
-            "widgetName": "descripcion"
+            "widgetName": "txtDescription"
+          },
+          {
+            "command": "GetValue",
+            "variableName": "categoryId",
+            "widgetName": "cmbCategory"
+          },
+          {
+            "command": "GetValue",
+            "variableName": "userAssignedId",
+            "widgetName": "cmbAssignedUser"
           },
           {
             "command": "Set",
@@ -35,6 +84,16 @@
             "variableName": "ticketUpdate.description"
           },
           {
+            "command": "Set",
+            "expression": "categoryId",
+            "variableName": "ticketUpdate.categoryId"
+          },
+          {
+            "command": "Set",
+            "expression": "userAssignedId",
+            "variableName": "ticketUpdate.assignedUserId"
+          },
+          {
             "command": "Execute",
             "expression": "HelpDeskService.UpdateTicket(ticket.id, ticketUpdate)"
           }
@@ -50,12 +109,20 @@
             "type": "string"
           },
           {
-            "name": "ticket",
-            "type": "HelpDeskService.Ticket"
+            "name": "categoryId",
+            "type": "string"
+          },
+          {
+            "name": "userAssignedId",
+            "type": "string"
           },
           {
             "name": "ticketUpdate",
             "type": "HelpDeskService.TicketUpdate"
+          },
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.Ticket"
           }
         ]
       },
@@ -74,17 +141,40 @@
       {
         "binding": "ticket.name",
         "label": "Nombre",
-        "name": "name",
+        "mandatory": true,
+        "name": "txtName",
+        "size": "third",
         "widget": "TextBox"
+      },
+      {
+        "binding": "ticket.category.id",
+        "dataFormat": "key-value",
+        "label": "Categoria",
+        "mandatory": true,
+        "mode": "single",
+        "name": "cmbCategory",
+        "size": "third",
+        "widget": "ComboBox"
+      },
+      {
+        "binding": "ticket.userAssigned.id",
+        "dataFormat": "key-value",
+        "label": "Asignar a",
+        "mode": "single",
+        "name": "cmbAssignedUser",
+        "size": "third",
+        "widget": "ComboBox"
       },
       {
         "binding": "ticket.description",
         "label": "Descripcion",
-        "name": "descripcion",
+        "mandatory": true,
+        "name": "txtDescription",
+        "rows": 10,
         "widget": "TextArea"
       }
     ],
-    "cssClass": "blz-area-default",
+    "cssClass": "blz-padding-top-large blz-padding-right-large blz-padding-left-large blz-padding-bottom-large blz-area-default",
     "layout": "container"
   },
   "routing": null,

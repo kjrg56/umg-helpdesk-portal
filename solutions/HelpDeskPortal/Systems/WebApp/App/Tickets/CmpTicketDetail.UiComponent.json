@@ -1,0 +1,469 @@
+{
+  "eventsAndFunctions": [
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "ReadModel",
+            "modelVariableName": "ticket",
+            "variableName": "ticket"
+          },
+          {
+            "command": "SetTitle",
+            "expression": "\"Ticket #\" + ConvertToString(ticket.id)",
+            "widgetName": "mainContainer"
+          },
+          {
+            "children": [
+              {
+                "attributeName": "format",
+                "command": "SetAttribute",
+                "expression": "\"\"",
+                "widgetName": "fieldAssignationDate"
+              },
+              {
+                "command": "SetValue",
+                "expression": "\"-\"",
+                "widgetName": "fieldAssignationDate"
+              }
+            ],
+            "command": "If",
+            "expression": "ticket.assignationDate == null"
+          },
+          {
+            "children": [
+              {
+                "attributeName": "format",
+                "command": "SetAttribute",
+                "expression": "\"DateTime\"",
+                "widgetName": "fieldAssignationDate"
+              },
+              {
+                "command": "SetValue",
+                "expression": "ticket.assignationDate",
+                "widgetName": "fieldAssignationDate"
+              }
+            ],
+            "command": "Else"
+          },
+          {
+            "children": [
+              {
+                "attributeName": "format",
+                "command": "SetAttribute",
+                "expression": "\"\"",
+                "widgetName": "fieldCloseDate"
+              },
+              {
+                "command": "SetValue",
+                "expression": "\"-\"",
+                "widgetName": "fieldCloseDate"
+              }
+            ],
+            "command": "If",
+            "expression": "ticket.closedDate == null"
+          },
+          {
+            "children": [
+              {
+                "attributeName": "format",
+                "command": "SetAttribute",
+                "expression": "\"DateTime\"",
+                "widgetName": "fieldCloseDate"
+              },
+              {
+                "command": "SetValue",
+                "expression": "ticket.closedDate",
+                "widgetName": "fieldCloseDate"
+              }
+            ],
+            "command": "Else"
+          },
+          {
+            "children": [
+              {
+                "command": "SetValue",
+                "expression": "ConvertToString(ticket.hours) + \" horas\"",
+                "widgetName": "fieldHours"
+              }
+            ],
+            "command": "If",
+            "expression": "ticket.hours != null"
+          },
+          {
+            "children": [
+              {
+                "command": "HideAction",
+                "expressionActionKey": "\"createComment\"",
+                "widgetName": "containerComments"
+              }
+            ],
+            "command": "If",
+            "expression": "ticket.status == \"Closed\""
+          },
+          {
+            "command": "Refresh",
+            "widgetName": "repeaterComments"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.Ticket"
+          }
+        ]
+      },
+      "name": "main_init"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "args",
+            "type": "ArgsLoadRecords"
+          }
+        ],
+        "statements": [
+          {
+            "command": "ReadModel",
+            "modelVariableName": "ticket",
+            "variableName": "ticket"
+          },
+          {
+            "command": "Set",
+            "expression": "HelpDeskService.ListTicketCommentsById(ticket.id, {})",
+            "variableName": "comments"
+          },
+          {
+            "command": "Return",
+            "expression": "comments"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.Ticket"
+          },
+          {
+            "name": "comments",
+            "type": "list(HelpDeskService.TicketComment)"
+          }
+        ]
+      },
+      "name": "repeaterComments_loadRecords"
+    },
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "ReadModel",
+            "modelVariableName": "ticket",
+            "variableName": "ticket"
+          },
+          {
+            "buttons": "ok-cancel",
+            "command": "Open",
+            "expressionIcon": "\"add.svg\"",
+            "expressionStartModel": "{ticket: ticket}",
+            "expressionTitle": "\"Nuevo Comentario\"",
+            "mode": "window",
+            "size": "default",
+            "uiComponentName": "CmpCreateComment"
+          },
+          {
+            "children": [
+              {
+                "command": "Execute",
+                "expression": "refreshTicketData(ticket.id)"
+              },
+              {
+                "command": "Refresh",
+                "widgetName": "repeaterComments"
+              },
+              {
+                "command": "CloseCurrent"
+              }
+            ],
+            "command": "OnOk",
+            "variableNameOpenedModel": "openModel"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.Ticket"
+          },
+          {
+            "name": "openModel",
+            "type": "any"
+          }
+        ]
+      },
+      "name": "containerComments_handlerAction_createComment"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "ticketId",
+            "type": "string"
+          }
+        ],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "HelpDeskService.GetTicketById(ticketId)",
+            "variableName": "ticket"
+          },
+          {
+            "command": "WriteModel",
+            "expression": "ticket",
+            "modelVariableName": "ticket"
+          },
+          {
+            "command": "Execute",
+            "expression": "main_init()"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.Ticket"
+          }
+        ]
+      },
+      "name": "refreshTicketData"
+    }
+  ],
+  "model": [
+    {
+      "name": "ticket",
+      "required": false,
+      "type": "HelpDeskService.Ticket"
+    },
+    {
+      "name": "ticketId",
+      "required": false,
+      "type": "string"
+    }
+  ],
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "bold": true,
+                        "color": "default",
+                        "name": "label2",
+                        "text": "Creado por",
+                        "widget": "Label"
+                      },
+                      {
+                        "binding": "ticket.userCreated.fullName",
+                        "color": "default",
+                        "name": "field2",
+                        "widget": "Field"
+                      }
+                    ],
+                    "layout": "container",
+                    "size": "quarter"
+                  },
+                  {
+                    "children": [
+                      {
+                        "bold": true,
+                        "color": "default",
+                        "name": "label3",
+                        "text": "Asignado a",
+                        "widget": "Label"
+                      },
+                      {
+                        "binding": "ticket.userAssigned.fullName",
+                        "color": "default",
+                        "name": "field3",
+                        "widget": "Field"
+                      }
+                    ],
+                    "layout": "container",
+                    "size": "quarter"
+                  },
+                  {
+                    "children": [
+                      {
+                        "bold": true,
+                        "color": "default",
+                        "name": "label4",
+                        "text": "Categoria",
+                        "widget": "Label"
+                      },
+                      {
+                        "binding": "ticket.category.name",
+                        "color": "default",
+                        "name": "field4",
+                        "widget": "Field"
+                      }
+                    ],
+                    "layout": "container",
+                    "size": "quarter"
+                  },
+                  {
+                    "children": [
+                      {
+                        "bold": true,
+                        "color": "default",
+                        "name": "label1",
+                        "text": "Estado",
+                        "widget": "Label"
+                      },
+                      {
+                        "binding": "ticket.status",
+                        "color": "default",
+                        "name": "field1",
+                        "widget": "Field"
+                      }
+                    ],
+                    "layout": "container",
+                    "size": "quarter"
+                  }
+                ],
+                "layout": "container"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "bold": true,
+                        "color": "default",
+                        "name": "label6",
+                        "text": "Fecha de creacion",
+                        "widget": "Label"
+                      },
+                      {
+                        "binding": "ticket.creationDate",
+                        "color": "default",
+                        "format": "DateTime",
+                        "name": "field6",
+                        "widget": "Field"
+                      }
+                    ],
+                    "layout": "container",
+                    "size": "quarter"
+                  },
+                  {
+                    "children": [
+                      {
+                        "bold": true,
+                        "color": "default",
+                        "name": "label7",
+                        "text": "Fecha de asignacion",
+                        "widget": "Label"
+                      },
+                      {
+                        "color": "default",
+                        "name": "fieldAssignationDate",
+                        "widget": "Field"
+                      }
+                    ],
+                    "layout": "container",
+                    "size": "quarter"
+                  },
+                  {
+                    "children": [
+                      {
+                        "bold": true,
+                        "color": "default",
+                        "name": "label8",
+                        "text": "Fecha de cierre",
+                        "widget": "Label"
+                      },
+                      {
+                        "color": "default",
+                        "name": "fieldCloseDate",
+                        "widget": "Field"
+                      }
+                    ],
+                    "layout": "container",
+                    "size": "quarter"
+                  },
+                  {
+                    "children": [
+                      {
+                        "bold": true,
+                        "color": "default",
+                        "name": "label5",
+                        "text": "Tiempo empleado",
+                        "widget": "Label"
+                      },
+                      {
+                        "binding": "ticket.hours",
+                        "color": "default",
+                        "name": "fieldHours",
+                        "widget": "Field"
+                      }
+                    ],
+                    "layout": "container",
+                    "size": "quarter"
+                  }
+                ],
+                "layout": "container"
+              }
+            ],
+            "layout": "container",
+            "verticalSeparation": "normal"
+          },
+          {
+            "actions": [
+              {
+                "color": "primary",
+                "icon": "add.svg",
+                "key": "createComment",
+                "text": "Nuevo"
+              }
+            ],
+            "children": [
+              {
+                "actions": [],
+                "cssClass": "blz-padding-top",
+                "disableSelection": true,
+                "name": "repeaterComments",
+                "typeName": "HelpDeskService.TicketComment",
+                "uiComponentBinding": {
+                  "comment": "{record}"
+                },
+                "uiComponentName": "CmpComment",
+                "widget": "Repeater"
+              }
+            ],
+            "layout": "container",
+            "name": "containerComments",
+            "title": "Comentarios"
+          }
+        ],
+        "cssClass": "blz-padding-top-large blz-padding-right-large blz-padding-left-large blz-padding-bottom-large",
+        "layout": "container"
+      }
+    ],
+    "cssClass": "blz-area-default",
+    "icon": "ticket.svg",
+    "layout": "container",
+    "name": "mainContainer",
+    "title": "Ticket"
+  },
+  "routing": {
+    "path": "/tickets/{ticketId}"
+  },
+  "unused": []
+}

@@ -13,6 +13,13 @@
         "secret": "12345",
         "algorithm": "HMAC-SHA256"
       }
+    },
+    {
+      "systemName": "HelpDeskService",
+      "action": "connect",
+      "connectionData": {
+        "url": "http://localhost:9090"
+      }
     }
   ]
 }

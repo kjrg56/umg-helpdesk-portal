@@ -1,0 +1,138 @@
+{
+  "eventsAndFunctions": [
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "ReadModel",
+            "modelVariableName": "comment",
+            "variableName": "comment"
+          },
+          {
+            "command": "Set",
+            "expression": "HelpDeskService.GetUserById(comment.userCreatedId)",
+            "variableName": "userCreated"
+          },
+          {
+            "command": "SetValue",
+            "expression": "userCreated.fullName",
+            "widgetName": "fieldUserCreated"
+          },
+          {
+            "command": "SetValue",
+            "expression": "\"[[\"+userCreated.userRole+\"]]\" + \" | \" + userCreated.department.name",
+            "widgetName": "fieldUserRole"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "userCreated",
+            "type": "HelpDeskService.User"
+          },
+          {
+            "name": "comment",
+            "type": "HelpDeskService.TicketComment"
+          }
+        ]
+      },
+      "name": "main_init"
+    }
+  ],
+  "model": [
+    {
+      "name": "comment",
+      "required": false,
+      "type": "HelpDeskService.TicketComment"
+    }
+  ],
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "align": "center",
+                "color": "default",
+                "icon": "user-48.svg",
+                "name": "icon1",
+                "size": "large",
+                "widget": "Icon"
+              }
+            ],
+            "layout": "container",
+            "size": "1/12"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "bold": true,
+                        "color": "default",
+                        "name": "fieldUserCreated",
+                        "widget": "Field"
+                      },
+                      {
+                        "align": "left",
+                        "color": "secondary",
+                        "name": "fieldUserRole",
+                        "size": "small",
+                        "widget": "Field"
+                      }
+                    ],
+                    "layout": "container",
+                    "size": "three-quarter"
+                  },
+                  {
+                    "children": [
+                      {
+                        "align": "left",
+                        "binding": "comment.creationDate",
+                        "color": "secondary",
+                        "format": "DateTime",
+                        "name": "fieldCreationDate",
+                        "size": "small",
+                        "widget": "Field"
+                      }
+                    ],
+                    "layout": "container",
+                    "size": "2/12"
+                  }
+                ],
+                "layout": "container",
+                "size": "11/12"
+              },
+              {
+                "children": [
+                  {
+                    "align": "left",
+                    "binding": "comment.comment",
+                    "color": "default",
+                    "name": "field1",
+                    "size": "small",
+                    "widget": "Field"
+                  }
+                ],
+                "layout": "container"
+              }
+            ],
+            "layout": "container",
+            "size": "11/12",
+            "verticalSeparation": "large"
+          }
+        ],
+        "cssClass": "blz-padding-top blz-border-top",
+        "layout": "container"
+      }
+    ],
+    "cssClass": "blz-area-default",
+    "layout": "container"
+  },
+  "routing": null,
+  "unused": []
+}

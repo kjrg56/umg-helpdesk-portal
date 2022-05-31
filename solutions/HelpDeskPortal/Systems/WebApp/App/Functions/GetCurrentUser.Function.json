@@ -1,0 +1,29 @@
+{
+  "algorithm": {
+    "parameters": [],
+    "statements": [
+      {
+        "command": "Set",
+        "expression": "{}",
+        "variableName": "user"
+      },
+      {
+        "command": "Set",
+        "expression": "\"1\"",
+        "variableName": "user.id"
+      },
+      {
+        "command": "Return",
+        "expression": "user"
+      }
+    ],
+    "typeReturn": "HelpDeskService.User",
+    "variables": [
+      {
+        "name": "user",
+        "type": "HelpDeskService.User"
+      }
+    ]
+  },
+  "routing": null
+}

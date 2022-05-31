@@ -1,0 +1,117 @@
+{
+  "eventsAndFunctions": [
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "ReadModel",
+            "modelVariableName": "ticket",
+            "variableName": "ticket"
+          },
+          {
+            "command": "Set",
+            "expression": "GetCurrentUser()",
+            "variableName": "user"
+          },
+          {
+            "command": "Set",
+            "expression": "{}",
+            "variableName": "comment"
+          },
+          {
+            "command": "GetValue",
+            "variableName": "comment.comment",
+            "widgetName": "txtComment"
+          },
+          {
+            "command": "GetValue",
+            "variableName": "comment.hours",
+            "widgetName": "nmbTiempo"
+          },
+          {
+            "command": "Set",
+            "expression": "user.id",
+            "variableName": "comment.userCreatedId"
+          },
+          {
+            "command": "Execute",
+            "expression": "HelpDeskService.CreateTicketComment(ticket.id, comment)"
+          },
+          {
+            "command": "GetValue",
+            "variableName": "mustClose",
+            "widgetName": "chkMustClose"
+          },
+          {
+            "children": [
+              {
+                "command": "Execute",
+                "expression": "HelpDeskService.CloseTicket(ticket.id)"
+              }
+            ],
+            "command": "If",
+            "expression": "mustClose"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.Ticket"
+          },
+          {
+            "name": "comment",
+            "type": "HelpDeskService.TicketCommentCreation"
+          },
+          {
+            "name": "user",
+            "type": "HelpDeskService.User"
+          },
+          {
+            "name": "hours",
+            "type": "integer"
+          },
+          {
+            "name": "mustClose",
+            "type": "boolean"
+          }
+        ]
+      },
+      "name": "main_submit"
+    }
+  ],
+  "model": [
+    {
+      "name": "ticket",
+      "required": false,
+      "type": "HelpDeskService.Ticket"
+    }
+  ],
+  "root": {
+    "children": [
+      {
+        "label": "Tiempo empleado (horas)",
+        "mandatory": true,
+        "name": "nmbTiempo",
+        "widget": "NumericBox"
+      },
+      {
+        "label": "Comentario",
+        "mandatory": true,
+        "name": "txtComment",
+        "rows": 5,
+        "widget": "TextArea"
+      },
+      {
+        "label": "¿Cerrar ticket?",
+        "name": "chkMustClose",
+        "widget": "CheckBox"
+      }
+    ],
+    "cssClass": "blz-area-default",
+    "layout": "container"
+  },
+  "routing": null,
+  "unused": []
+}

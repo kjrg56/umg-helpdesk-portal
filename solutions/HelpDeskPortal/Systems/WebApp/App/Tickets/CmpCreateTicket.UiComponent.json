@@ -7,19 +7,33 @@
           {
             "command": "Set",
             "expression": "HelpDeskService.ListTicketCategories({})",
-            "variableName": "list"
+            "variableName": "listCategories"
+          },
+          {
+            "command": "Set",
+            "expression": "HelpDeskService.ListUsers({})",
+            "variableName": "listUsers"
           },
           {
             "command": "Load",
-            "expression": "Map(list, [id, name])",
-            "widgetName": "category"
+            "expression": "Map(listCategories, [id, name])",
+            "widgetName": "cmbCategory"
+          },
+          {
+            "command": "Load",
+            "expression": "Map(listUsers, [id, fullName])",
+            "widgetName": "cmbAssignedUser"
           }
         ],
         "typeReturn": "any",
         "variables": [
           {
-            "name": "list",
+            "name": "listCategories",
             "type": "list(HelpDeskService.TicketCategory)"
+          },
+          {
+            "name": "listUsers",
+            "type": "list(HelpDeskService.User)"
           }
         ]
       },
@@ -32,12 +46,27 @@
           {
             "command": "GetValue",
             "variableName": "nombre",
-            "widgetName": "name"
+            "widgetName": "txtName"
           },
           {
             "command": "GetValue",
             "variableName": "descripcion",
-            "widgetName": "descripcion"
+            "widgetName": "txtDescription"
+          },
+          {
+            "command": "GetValue",
+            "variableName": "categoryId",
+            "widgetName": "cmbCategory"
+          },
+          {
+            "command": "GetValue",
+            "variableName": "userAssignedId",
+            "widgetName": "cmbAssignedUser"
+          },
+          {
+            "command": "Set",
+            "expression": "GetCurrentUser()",
+            "variableName": "user"
           },
           {
             "command": "Set",
@@ -55,6 +84,21 @@
             "variableName": "ticket.description"
           },
           {
+            "command": "Set",
+            "expression": "categoryId",
+            "variableName": "ticket.categoryId"
+          },
+          {
+            "command": "Set",
+            "expression": "userAssignedId",
+            "variableName": "ticket.assignedUserId"
+          },
+          {
+            "command": "Set",
+            "expression": "user.id",
+            "variableName": "ticket.userCreatedId"
+          },
+          {
             "command": "Execute",
             "expression": "HelpDeskService.CreateTicket(ticket)"
           }
@@ -70,8 +114,20 @@
             "type": "string"
           },
           {
+            "name": "categoryId",
+            "type": "string"
+          },
+          {
+            "name": "userAssignedId",
+            "type": "string"
+          },
+          {
             "name": "ticket",
             "type": "HelpDeskService.TicketCreation"
+          },
+          {
+            "name": "user",
+            "type": "HelpDeskService.User"
           }
         ]
       },
@@ -83,7 +139,9 @@
     "children": [
       {
         "label": "Nombre",
-        "name": "name",
+        "mandatory": true,
+        "name": "txtName",
+        "size": "third",
         "widget": "TextBox"
       },
       {
@@ -91,16 +149,27 @@
         "label": "Categoria",
         "mandatory": true,
         "mode": "single",
-        "name": "category",
+        "name": "cmbCategory",
+        "size": "third",
+        "widget": "ComboBox"
+      },
+      {
+        "dataFormat": "key-value",
+        "label": "Asignar a",
+        "mode": "single",
+        "name": "cmbAssignedUser",
+        "size": "third",
         "widget": "ComboBox"
       },
       {
         "label": "Descripcion",
-        "name": "descripcion",
+        "mandatory": true,
+        "name": "txtDescription",
+        "rows": 10,
         "widget": "TextArea"
       }
     ],
-    "cssClass": "blz-area-default",
+    "cssClass": "blz-padding-top-large blz-padding-right-large blz-padding-left-large blz-padding-bottom-large blz-area-default",
     "layout": "container"
   },
   "routing": null,
