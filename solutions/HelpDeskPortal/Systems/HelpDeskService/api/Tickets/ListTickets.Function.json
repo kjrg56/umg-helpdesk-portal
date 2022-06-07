@@ -22,6 +22,11 @@
         "bind": "args.limit",
         "in": "Query",
         "name": "limit"
+      },
+      {
+        "bind": "args.userId",
+        "in": "Query",
+        "name": "userId"
       }
     ],
     "path": "/tickets",

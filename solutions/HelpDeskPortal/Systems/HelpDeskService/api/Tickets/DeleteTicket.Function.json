@@ -1,0 +1,43 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "id",
+        "type": "string"
+      }
+    ],
+    "statements": [],
+    "typeReturn": "Ticket",
+    "variables": []
+  },
+  "routing": {
+    "method": "DELETE",
+    "parameters": [
+      {
+        "bind": "id",
+        "in": "Path",
+        "name": "id"
+      }
+    ],
+    "path": "/tickets/{id}",
+    "remarks": "Delete Ticket",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK",
+        "typeName": "Ticket"
+      },
+      {
+        "httpStatus": "400",
+        "remarks": "Invalid"
+      },
+      {
+        "httpStatus": "404",
+        "remarks": "Not found"
+      }
+    ],
+    "tags": [
+      "tickets"
+    ]
+  }
+}

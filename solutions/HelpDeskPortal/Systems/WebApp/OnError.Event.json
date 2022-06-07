@@ -6,17 +6,7 @@
         "type": "Error"
       }
     ],
-    "statements": [
-      {
-        "children": [
-          {
-            "command": "Logout"
-          }
-        ],
-        "command": "If",
-        "expression": "^err.code == \"Unauthorized\""
-      }
-    ],
+    "statements": [],
     "typeReturn": "any",
     "variables": []
   }

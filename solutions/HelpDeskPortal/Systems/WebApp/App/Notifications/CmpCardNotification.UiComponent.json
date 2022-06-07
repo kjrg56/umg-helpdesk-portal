@@ -1,0 +1,100 @@
+{
+  "eventsAndFunctions": [
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "ReadModel",
+            "modelVariableName": "notification",
+            "variableName": "notification"
+          },
+          {
+            "command": "SetValue",
+            "expression": "\"Notificación #\" + notification.id",
+            "widgetName": "fieldTag"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "notification",
+            "type": "HelpDeskService.Notification"
+          }
+        ]
+      },
+      "name": "main_init"
+    }
+  ],
+  "model": [
+    {
+      "name": "notification",
+      "required": false,
+      "type": "HelpDeskService.Notification"
+    }
+  ],
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "align": "center",
+                "attribute": {
+                  "color": "default",
+                  "icon": "notification.svg",
+                  "name": "icon2"
+                },
+                "color": "default",
+                "icon": "notification.svg",
+                "name": "icon2",
+                "size": "large",
+                "widget": "Icon"
+              }
+            ],
+            "layout": "container",
+            "size": "1/12"
+          },
+          {
+            "children": [
+              {
+                "bold": true,
+                "color": "default",
+                "name": "fieldTag",
+                "widget": "Field"
+              },
+              {
+                "binding": "notification.message",
+                "color": "default",
+                "name": "field3",
+                "widget": "Field"
+              }
+            ],
+            "layout": "container",
+            "size": "two-third"
+          },
+          {
+            "children": [
+              {
+                "binding": "notification.creationDate",
+                "color": "secondary",
+                "format": "DateTime",
+                "name": "fieldMessage",
+                "widget": "Field"
+              }
+            ],
+            "layout": "container",
+            "size": "2/12"
+          }
+        ],
+        "cssClass": "cusor-pointer blz-padding-top blz-padding-bottom blz-border-bottom",
+        "layout": "container"
+      }
+    ],
+    "cssClass": "blz-area-default",
+    "layout": "container"
+  },
+  "routing": null,
+  "unused": []
+}

@@ -1,0 +1,33 @@
+{
+  "eventsAndFunctions": [],
+  "model": [
+    {
+      "name": "category",
+      "required": false,
+      "type": "HelpDeskService.TicketCategory"
+    }
+  ],
+  "root": {
+    "children": [
+      {
+        "binding": "category.name",
+        "label": "Nombre",
+        "mandatory": true,
+        "name": "txtName",
+        "widget": "TextBox"
+      },
+      {
+        "binding": "category.description",
+        "label": "Descripcion",
+        "mandatory": true,
+        "name": "txtDesc",
+        "rows": 5,
+        "widget": "TextArea"
+      }
+    ],
+    "cssClass": "blz-area-default",
+    "layout": "container"
+  },
+  "routing": null,
+  "unused": []
+}

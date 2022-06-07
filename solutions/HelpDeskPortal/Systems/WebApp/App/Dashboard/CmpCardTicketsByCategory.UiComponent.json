@@ -1,0 +1,85 @@
+{
+  "eventsAndFunctions": [
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [],
+        "typeReturn": "any",
+        "variables": []
+      },
+      "name": "main_init"
+    }
+  ],
+  "model": [
+    {
+      "name": "analytic",
+      "required": false,
+      "type": "HelpDeskService.TicketsByStatus"
+    }
+  ],
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "align": "center",
+                "attribute": {
+                  "binding": "analytic.quantity",
+                  "bold": true,
+                  "color": "default",
+                  "name": "field1",
+                  "size": "x-large"
+                },
+                "binding": "analytic.quantity",
+                "bold": true,
+                "color": "default",
+                "name": "field1",
+                "size": "x-large",
+                "widget": "Field"
+              }
+            ],
+            "layout": "container"
+          },
+          {
+            "children": [
+              {
+                "align": "center",
+                "attribute": {
+                  "binding": "analytic.status",
+                  "color": "default",
+                  "name": "field2",
+                  "size": "x-large"
+                },
+                "binding": "analytic.status",
+                "color": "default",
+                "name": "field2",
+                "size": "x-large",
+                "widget": "Field"
+              }
+            ],
+            "layout": "container"
+          }
+        ],
+        "cssClass": "blz-padding-top-large blz-border-top blz-border-right blz-border-left blz-border-bottom blz-border-radius blz-cast-shadow",
+        "height": 150,
+        "horizontalSeparation": "large",
+        "layout": "container",
+        "name": "mainContainer"
+      }
+    ],
+    "cssClass": "blz-area-default",
+    "layout": "container"
+  },
+  "routing": null,
+  "unused": [
+    {
+      "__internalName": "label1",
+      "align": "left",
+      "name": "label1",
+      "size": "x-large",
+      "widget": "Label"
+    }
+  ]
+}

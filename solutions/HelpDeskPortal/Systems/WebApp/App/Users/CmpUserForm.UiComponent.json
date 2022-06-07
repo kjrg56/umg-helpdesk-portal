@@ -1,0 +1,207 @@
+{
+  "eventsAndFunctions": [
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "Load",
+            "expression": "Map(HelpDeskService.ListDepartments({}), [id, name])",
+            "widgetName": "cmbDepto"
+          },
+          {
+            "command": "Load",
+            "expression": "[\"Admin\", \"Technician\", \"Worker\", \"Manager\"]",
+            "widgetName": "cmbRole"
+          },
+          {
+            "command": "ReadModel",
+            "modelVariableName": "user",
+            "variableName": "user"
+          },
+          {
+            "children": [
+              {
+                "command": "Disable",
+                "widgetName": "txtUserName"
+              },
+              {
+                "command": "Disable",
+                "widgetName": "txtPasswd1"
+              },
+              {
+                "command": "Disable",
+                "widgetName": "txtPasswd2"
+              },
+              {
+                "command": "Hide",
+                "widgetName": "txtPasswd1"
+              },
+              {
+                "command": "Hide",
+                "widgetName": "txtPasswd2"
+              }
+            ],
+            "command": "If",
+            "expression": "user != null"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "user",
+            "type": "HelpDeskService.User"
+          }
+        ]
+      },
+      "name": "main_init"
+    },
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "GetValue",
+            "variableName": "pwd1",
+            "widgetName": "txtPasswd1"
+          },
+          {
+            "command": "GetValue",
+            "variableName": "pwd2",
+            "widgetName": "txtPasswd2"
+          },
+          {
+            "children": [
+              {
+                "command": "AlertMessage",
+                "expressionMessage": "\"Las contraseñas no son iguales.\"",
+                "expressionTitle": "\"Contraseña invalida\"",
+                "severity": "error"
+              },
+              {
+                "command": "Return",
+                "expression": "false"
+              }
+            ],
+            "command": "If",
+            "expression": "pwd1 != pwd2"
+          },
+          {
+            "children": [
+              {
+                "command": "WriteModel",
+                "expression": "pwd1",
+                "modelVariableName": "pwd"
+              }
+            ],
+            "command": "Else"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "pwd1",
+            "type": "string"
+          },
+          {
+            "name": "pwd2",
+            "type": "string"
+          },
+          {
+            "name": "user",
+            "type": "HelpDeskService.User"
+          }
+        ]
+      },
+      "name": "main_submit"
+    }
+  ],
+  "model": [
+    {
+      "name": "user",
+      "required": false,
+      "type": "HelpDeskService.User"
+    },
+    {
+      "name": "pwd",
+      "required": false,
+      "type": "string"
+    }
+  ],
+  "root": {
+    "children": [
+      {
+        "binding": "user.fullName",
+        "label": "Nombre Completo",
+        "mandatory": true,
+        "name": "txtFullName",
+        "widget": "TextBox"
+      },
+      {
+        "binding": "user.email",
+        "label": "Email",
+        "mandatory": true,
+        "name": "txtEmail",
+        "size": "half",
+        "widget": "TextBox"
+      },
+      {
+        "binding": "user.dateOfBirth",
+        "label": "Fecha de Nacimiento",
+        "mandatory": true,
+        "name": "dtbFechaNac",
+        "size": "half",
+        "widget": "DateBox"
+      },
+      {
+        "binding": "user.userRole",
+        "dataFormat": "plain",
+        "label": "Rol",
+        "mandatory": true,
+        "mode": "single",
+        "name": "cmbRole",
+        "size": "half",
+        "widget": "ComboBox"
+      },
+      {
+        "binding": "user.department.id",
+        "dataFormat": "key-value",
+        "label": "Departmento",
+        "mandatory": true,
+        "mode": "single",
+        "name": "cmbDepto",
+        "size": "half",
+        "widget": "ComboBox"
+      },
+      {
+        "binding": "user.username",
+        "label": "Usuario",
+        "mandatory": true,
+        "name": "txtUserName",
+        "size": "third",
+        "widget": "TextBox"
+      },
+      {
+        "label": "Contraseña",
+        "mandatory": true,
+        "name": "txtPasswd1",
+        "secure": true,
+        "size": "third",
+        "widget": "TextBox"
+      },
+      {
+        "label": "Confirmar contraseña",
+        "mandatory": true,
+        "name": "txtPasswd2",
+        "patternMask": "*",
+        "secure": true,
+        "size": "third",
+        "widget": "TextBox"
+      }
+    ],
+    "cssClass": "blz-area-default",
+    "layout": "container"
+  },
+  "routing": null,
+  "unused": []
+}

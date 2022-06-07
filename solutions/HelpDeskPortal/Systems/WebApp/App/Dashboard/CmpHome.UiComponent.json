@@ -1,0 +1,331 @@
+{
+  "eventsAndFunctions": [
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "GetCurrentUser()",
+            "variableName": "user"
+          },
+          {
+            "children": [
+              {
+                "command": "ReloadApplication"
+              }
+            ],
+            "command": "If",
+            "expression": "user == null"
+          },
+          {
+            "children": [
+              {
+                "command": "Set",
+                "expression": "HelpDeskService.GetTicketAnalyticsByStatus()",
+                "variableName": "list"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "command": "SetValue",
+                        "expression": "item.quantity",
+                        "widgetName": "fieldNumPending"
+                      },
+                      {
+                        "command": "SetValue",
+                        "expression": "item.status",
+                        "widgetName": "fieldPending"
+                      }
+                    ],
+                    "command": "If",
+                    "expression": "item.status == \"Pending\""
+                  },
+                  {
+                    "children": [
+                      {
+                        "command": "SetValue",
+                        "expression": "item.quantity",
+                        "widgetName": "fieldNumAssign"
+                      },
+                      {
+                        "command": "SetValue",
+                        "expression": "item.status",
+                        "widgetName": "fieldAssign"
+                      }
+                    ],
+                    "command": "ElseIf",
+                    "expression": "item.status == \"Assigned\""
+                  },
+                  {
+                    "children": [
+                      {
+                        "command": "SetValue",
+                        "expression": "item.quantity",
+                        "widgetName": "fieldNumProgress"
+                      },
+                      {
+                        "command": "SetValue",
+                        "expression": "item.status",
+                        "widgetName": "fieldProgress"
+                      }
+                    ],
+                    "command": "ElseIf",
+                    "expression": "item.status == \"InProgress\""
+                  },
+                  {
+                    "children": [
+                      {
+                        "command": "SetValue",
+                        "expression": "item.quantity",
+                        "widgetName": "fieldNumClosed"
+                      },
+                      {
+                        "command": "SetValue",
+                        "expression": "item.status",
+                        "widgetName": "fieldClosed"
+                      }
+                    ],
+                    "command": "ElseIf",
+                    "expression": "item.status == \"Closed\""
+                  }
+                ],
+                "command": "ForEach",
+                "expressionList": "list",
+                "variableNameItem": "item"
+              }
+            ],
+            "command": "Else"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "list",
+            "type": "list(HelpDeskService.TicketsByStatus)"
+          },
+          {
+            "name": "item",
+            "type": "HelpDeskService.TicketsByStatus"
+          },
+          {
+            "name": "user",
+            "type": "any"
+          }
+        ]
+      },
+      "name": "main_init"
+    },
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [],
+        "typeReturn": "any",
+        "variables": []
+      },
+      "name": "main_activate"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "args",
+            "type": "ArgsLoadRecords"
+          }
+        ],
+        "statements": [
+          {
+            "command": "Return",
+            "expression": "HelpDeskService.GetTicketAnalyticsByStatus()"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": []
+      },
+      "name": "categories_loadRecords"
+    }
+  ],
+  "model": [],
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "align": "center",
+            "attribute": {
+              "bold": true,
+              "color": "default",
+              "name": "lblTitle",
+              "text": "Sistema de Gestión de Tickets"
+            },
+            "bold": true,
+            "color": "default",
+            "name": "lblTitle",
+            "size": "x-large",
+            "text": "Sistema de Gestión de Tickets",
+            "widget": "Label"
+          },
+          {
+            "align": "center",
+            "attribute": {
+              "color": "default",
+              "name": "lblName",
+              "text": "Help Desk"
+            },
+            "color": "default",
+            "name": "lblName",
+            "size": "x-large",
+            "text": "Help Desk",
+            "widget": "Label"
+          }
+        ],
+        "cssClass": "blz-padding-top-large blz-padding-bottom-large",
+        "layout": "container"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "align": "center",
+                "attribute": {
+                  "bold": true,
+                  "color": "default",
+                  "name": "fieldNumPending"
+                },
+                "bold": true,
+                "color": "default",
+                "name": "fieldNumPending",
+                "size": "x-large",
+                "widget": "Field"
+              },
+              {
+                "align": "center",
+                "attribute": {
+                  "color": "default",
+                  "name": "fieldPending"
+                },
+                "color": "default",
+                "name": "fieldPending",
+                "size": "x-large",
+                "widget": "Field"
+              }
+            ],
+            "cssClass": "blz-padding-top-large blz-border-top blz-border-right blz-border-left blz-border-bottom blz-border-radius blz-cast-shadow blz-area-default",
+            "height": 150,
+            "layout": "container",
+            "size": "quarter"
+          },
+          {
+            "children": [
+              {
+                "align": "center",
+                "attribute": {
+                  "bold": true,
+                  "color": "default",
+                  "name": "fieldNumAssign"
+                },
+                "bold": true,
+                "color": "default",
+                "name": "fieldNumAssign",
+                "size": "x-large",
+                "widget": "Field"
+              },
+              {
+                "align": "center",
+                "attribute": {
+                  "color": "default",
+                  "name": "fieldAssign"
+                },
+                "color": "default",
+                "name": "fieldAssign",
+                "size": "x-large",
+                "widget": "Field"
+              }
+            ],
+            "cssClass": "blz-padding-top-large blz-border-top blz-border-right blz-border-left blz-border-bottom blz-border-radius blz-cast-shadow blz-area-warning",
+            "height": 150,
+            "layout": "container",
+            "size": "quarter"
+          },
+          {
+            "children": [
+              {
+                "align": "center",
+                "attribute": {
+                  "bold": true,
+                  "color": "default",
+                  "name": "fieldNumProgress"
+                },
+                "bold": true,
+                "color": "default",
+                "name": "fieldNumProgress",
+                "size": "x-large",
+                "widget": "Field"
+              },
+              {
+                "align": "center",
+                "attribute": {
+                  "color": "default",
+                  "name": "fieldProgress"
+                },
+                "color": "default",
+                "name": "fieldProgress",
+                "size": "x-large",
+                "widget": "Field"
+              }
+            ],
+            "cssClass": "blz-padding-top-large blz-border-top blz-border-right blz-border-left blz-border-bottom blz-border-radius blz-cast-shadow blz-area-error",
+            "height": 150,
+            "layout": "container",
+            "size": "quarter"
+          },
+          {
+            "children": [
+              {
+                "align": "center",
+                "attribute": {
+                  "bold": true,
+                  "color": "default",
+                  "name": "fieldNumClosed"
+                },
+                "bold": true,
+                "color": "default",
+                "name": "fieldNumClosed",
+                "size": "x-large",
+                "widget": "Field"
+              },
+              {
+                "align": "center",
+                "attribute": {
+                  "color": "default",
+                  "name": "fieldClosed"
+                },
+                "color": "default",
+                "name": "fieldClosed",
+                "size": "x-large",
+                "widget": "Field"
+              }
+            ],
+            "cssClass": "blz-padding-top-large blz-border-top blz-border-right blz-border-left blz-border-bottom blz-border-radius blz-cast-shadow blz-area-info",
+            "height": 150,
+            "layout": "container",
+            "size": "quarter"
+          }
+        ],
+        "horizontalSeparation": "large",
+        "layout": "container"
+      }
+    ],
+    "cssClass": "blz-padding-top-large blz-padding-right-large blz-padding-left-large blz-padding-bottom-large blz-area-main",
+    "horizontalSeparation": "large",
+    "layout": "container",
+    "verticalSeparation": "large"
+  },
+  "routing": {
+    "path": "/dashboard"
+  },
+  "unused": []
+}

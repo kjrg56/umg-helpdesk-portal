@@ -3,25 +3,115 @@
     "parameters": [],
     "statements": [
       {
+        "command": "Set",
+        "expression": "GetCurrentUser()",
+        "variableName": "user"
+      },
+      {
         "command": "LoadResource",
         "expressionPath": "\"/CultureSp.json\"",
         "variableName": "culture"
       },
       {
-        "command": "LoadResource",
-        "expressionPath": "\"/MenuMain.json\"",
-        "variableName": "menu"
+        "children": [
+          {
+            "command": "Launch",
+            "expressionCulture": "^culture",
+            "expressionIcon": "null",
+            "expressionMainMenu": "null",
+            "expressionSubTitle": "null",
+            "expressionTitle": "null",
+            "expressionToolsMenu": "null",
+            "search": "disable",
+            "uiComponentName": "CmpLogin"
+          }
+        ],
+        "command": "If",
+        "expression": "user == null"
       },
       {
-        "command": "Launch",
-        "expressionCulture": "^culture",
-        "expressionIcon": "\"helpdesk-logo.png\"",
-        "expressionMainMenu": "^menu",
-        "expressionSubTitle": "null",
-        "expressionTitle": "\"Help Desk\"",
-        "expressionToolsMenu": "null",
-        "search": "disable",
-        "uiComponentName": "CmpHome"
+        "children": [
+          {
+            "command": "Set",
+            "expression": "[]",
+            "variableName": "userOptions"
+          },
+          {
+            "command": "Push",
+            "expressionItem": "{\n\ticon: \"logout.svg\", \n\ttext: \"Logout\",\n    handlerKey: \"logout\"\n}",
+            "variableNameList": "userOptions"
+          },
+          {
+            "command": "Switch",
+            "expression": "user.userRole"
+          },
+          {
+            "children": [
+              {
+                "command": "LoadResource",
+                "expressionPath": "\"/MenuAdmin.json\"",
+                "variableName": "menu"
+              },
+              {
+                "command": "Launch",
+                "expressionCulture": "^culture",
+                "expressionIcon": "\"helpdesk-logo.png\"",
+                "expressionMainMenu": "^menu",
+                "expressionSubTitle": "null",
+                "expressionTitle": "\"Help Desk\"",
+                "expressionToolsMenu": "Map({ \tchildren: [    \t{        \ticon: \"account_circle_24.svg\",             text: ToUpper(^user.fullName),            children: ^userOptions        }    ]}, children)",
+                "search": "disable",
+                "uiComponentName": "CmpHome"
+              }
+            ],
+            "command": "Case",
+            "expression": "\"Admin\""
+          },
+          {
+            "children": [
+              {
+                "command": "LoadResource",
+                "expressionPath": "\"/MenuManager.json\"",
+                "variableName": "menu"
+              },
+              {
+                "command": "Launch",
+                "expressionCulture": "^culture",
+                "expressionIcon": "\"helpdesk-logo.png\"",
+                "expressionMainMenu": "^menu",
+                "expressionSubTitle": "null",
+                "expressionTitle": "\"Help Desk\"",
+                "expressionToolsMenu": "Map({ \tchildren: [    \t{        \ticon: \"account_circle_24.svg\",             text: ToUpper(^user.fullName),            children: ^userOptions        }    ]}, children)",
+                "search": "disable",
+                "uiComponentName": "CmpHome"
+              }
+            ],
+            "command": "Case",
+            "expression": "\"Manager\""
+          },
+          {
+            "children": [
+              {
+                "command": "LoadResource",
+                "expressionPath": "\"/MenuWorker.json\"",
+                "variableName": "menu"
+              },
+              {
+                "command": "Launch",
+                "expressionCulture": "^culture",
+                "expressionIcon": "\"helpdesk-logo.png\"",
+                "expressionMainMenu": "^menu",
+                "expressionSubTitle": "null",
+                "expressionTitle": "\"Help Desk\"",
+                "expressionToolsMenu": "Map({ \n\tchildren: [\n    \t{\n        \ticon: \"account_circle_24.svg\", \n            text: ToUpper(^user.fullName),\n            children: ^userOptions\n        }\n    ]\n}, children)",
+                "search": "disable",
+                "uiComponentName": "CmpTickets"
+              }
+            ],
+            "command": "Default"
+          }
+        ],
+        "command": "Else"
       }
     ],
     "typeReturn": "any",
@@ -32,7 +122,19 @@
       },
       {
         "name": "menu",
-        "type": "list(MenuItem)"
+        "type": "MenuItem"
+      },
+      {
+        "name": "user",
+        "type": "HelpDeskService.User"
+      },
+      {
+        "name": "menuTools",
+        "type": "MenuItem"
+      },
+      {
+        "name": "userOptions",
+        "type": "list(any)"
       }
     ]
   }

@@ -1,11 +1,222 @@
 {
-  "eventsAndFunctions": [],
+  "eventsAndFunctions": [
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "Refresh",
+            "widgetName": "grid1"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": []
+      },
+      "name": "main_init"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "args",
+            "type": "ArgsLoadRecords"
+          }
+        ],
+        "statements": [
+          {
+            "command": "Return",
+            "expression": "HelpDeskService.ListTicketCategories({offset: args.offset, limit: args.limit})"
+          }
+        ],
+        "typeReturn": "list(any)",
+        "variables": []
+      },
+      "name": "grid1_loadRecords"
+    },
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "{}",
+            "variableName": "creation"
+          },
+          {
+            "buttons": "ok-cancel",
+            "command": "Open",
+            "expressionIcon": "\"add.svg\"",
+            "expressionStartModel": "{}",
+            "expressionTitle": "\"Crear categoria\"",
+            "mode": "window",
+            "size": "default",
+            "uiComponentName": "CmpTicketCategoryForm"
+          },
+          {
+            "children": [
+              {
+                "command": "Set",
+                "expression": "model.category.name",
+                "variableName": "creation.name"
+              },
+              {
+                "command": "Set",
+                "expression": "model.category.description",
+                "variableName": "creation.description"
+              },
+              {
+                "command": "Execute",
+                "expression": "HelpDeskService.CreateTicketCategory(creation)"
+              },
+              {
+                "command": "Refresh",
+                "widgetName": "grid1"
+              },
+              {
+                "command": "CloseCurrent"
+              }
+            ],
+            "command": "OnOk",
+            "variableNameOpenedModel": "model"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "model",
+            "type": "any"
+          },
+          {
+            "name": "creation",
+            "type": "HelpDeskService.TicketCategoryCreation"
+          }
+        ]
+      },
+      "name": "grid1_handlerAction_create"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "recordRef",
+            "type": "string"
+          },
+          {
+            "name": "arg",
+            "type": "string"
+          }
+        ],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "{}",
+            "variableName": "update"
+          },
+          {
+            "command": "ReadRecord",
+            "expressionRecordRef": "recordRef",
+            "variableName": "cat",
+            "widgetName": "grid1"
+          },
+          {
+            "buttons": "ok-cancel",
+            "command": "Open",
+            "expressionIcon": "\"edit.svg\"",
+            "expressionStartModel": "{category: cat}",
+            "expressionTitle": "\"Editar categoria\"",
+            "mode": "window",
+            "size": "default",
+            "uiComponentName": "CmpTicketCategoryForm"
+          },
+          {
+            "children": [
+              {
+                "command": "Set",
+                "expression": "model.category.name",
+                "variableName": "update.name"
+              },
+              {
+                "command": "Set",
+                "expression": "model.category.description",
+                "variableName": "update.description"
+              },
+              {
+                "command": "Execute",
+                "expression": "HelpDeskService.UpdateTicketCategory(cat.id, update)"
+              },
+              {
+                "command": "Refresh",
+                "widgetName": "grid1"
+              },
+              {
+                "command": "CloseCurrent"
+              }
+            ],
+            "command": "OnOk",
+            "variableNameOpenedModel": "model"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "model",
+            "type": "any"
+          },
+          {
+            "name": "update",
+            "type": "HelpDeskService.TicketCategoryUpdate"
+          },
+          {
+            "name": "cat",
+            "type": "HelpDeskService.TicketCategory"
+          }
+        ]
+      },
+      "name": "grid1_handlerRecordAction_edit"
+    }
+  ],
   "model": [],
   "root": {
     "children": [
       {
-        "name": "label1",
-        "widget": "Label"
+        "actions": [
+          {
+            "color": "primary",
+            "icon": "add.svg",
+            "key": "create",
+            "text": "Nuevo"
+          }
+        ],
+        "columns": [
+          {
+            "align": "left",
+            "bindText": "id",
+            "header": "ID",
+            "key": "id"
+          },
+          {
+            "align": "left",
+            "bindText": "name",
+            "header": "Nombre",
+            "key": "name"
+          },
+          {
+            "align": "left",
+            "bindText": "description",
+            "header": "Descripcion",
+            "key": "description"
+          }
+        ],
+        "name": "grid1",
+        "recordActions": [
+          {
+            "icon": "edit.svg",
+            "key": "edit",
+            "text": "Editar"
+          }
+        ],
+        "typeName": "HelpDeskService.TicketCategory",
+        "widget": "Grid"
       }
     ],
     "cssClass": "blz-area-default",

@@ -13,6 +13,12 @@
   },
   {
     "children": [],
+    "icon": "notification.svg",
+    "text": "Notifications",
+    "uiComponentName": "CmpNotifications"
+  },
+  {
+    "children": [],
     "icon": "user.svg",
     "text": "Usuarios",
     "uiComponentName": "CmpUsers"

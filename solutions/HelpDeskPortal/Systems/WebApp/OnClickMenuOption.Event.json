@@ -1,0 +1,46 @@
+{
+  "algorithm": {
+    "parameters": [
+      {
+        "name": "handlerKey",
+        "type": "string"
+      }
+    ],
+    "statements": [
+      {
+        "command": "Set",
+        "expression": "GetCurrentUser()",
+        "variableName": "user"
+      },
+      {
+        "children": [
+          {
+            "command": "ReloadApplication"
+          }
+        ],
+        "command": "If",
+        "expression": "user == null"
+      },
+      {
+        "children": [
+          {
+            "command": "RemoveFromLocalStorage",
+            "localStorageVariableName": "\"user\""
+          },
+          {
+            "command": "ReloadApplication"
+          }
+        ],
+        "command": "ElseIf",
+        "expression": "handlerKey == \"logout\""
+      }
+    ],
+    "typeReturn": "any",
+    "variables": [
+      {
+        "name": "user",
+        "type": "any"
+      }
+    ]
+  }
+}

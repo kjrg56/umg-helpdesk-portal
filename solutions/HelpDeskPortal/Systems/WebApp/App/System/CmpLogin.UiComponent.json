@@ -1,0 +1,212 @@
+{
+  "eventsAndFunctions": [
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "GetValue",
+            "variableName": "username",
+            "widgetName": "txtUsername"
+          },
+          {
+            "command": "GetValue",
+            "variableName": "pwd",
+            "widgetName": "txtPassword"
+          },
+          {
+            "children": [
+              {
+                "command": "Return",
+                "expression": "false"
+              }
+            ],
+            "command": "If",
+            "expression": "username == null || pwd == null"
+          },
+          {
+            "command": "Set",
+            "expression": "{}",
+            "variableName": "argsLogin"
+          },
+          {
+            "command": "Set",
+            "expression": "username",
+            "variableName": "argsLogin.username"
+          },
+          {
+            "command": "Set",
+            "expression": "pwd",
+            "variableName": "argsLogin.password"
+          },
+          {
+            "children": [
+              {
+                "command": "Set",
+                "expression": "HelpDeskService.LoginUser(argsLogin)",
+                "variableName": "user"
+              },
+              {
+                "children": [
+                  {
+                    "command": "WriteLocalStorage",
+                    "expression": "JsonStringify(user)",
+                    "localStorageVariableName": "\"user\""
+                  },
+                  {
+                    "command": "ReloadApplication"
+                  }
+                ],
+                "command": "If",
+                "expression": "user != null"
+              },
+              {
+                "children": [
+                  {
+                    "command": "RemoveFromLocalStorage",
+                    "localStorageVariableName": "\"user\""
+                  },
+                  {
+                    "command": "AlertMessage",
+                    "expressionMessage": "\"Usuario o contraseña incorrecta.\"",
+                    "expressionTitle": "\"Credenciales invalidas\"",
+                    "severity": "error"
+                  }
+                ],
+                "command": "Else"
+              }
+            ],
+            "command": "Try"
+          },
+          {
+            "children": [
+              {
+                "command": "RemoveFromLocalStorage",
+                "localStorageVariableName": "\"user\""
+              },
+              {
+                "command": "AlertMessage",
+                "expressionMessage": "\"Usuario o contraseña incorrecta.\"",
+                "expressionTitle": "\"Credenciales invalidas\"",
+                "severity": "error"
+              }
+            ],
+            "command": "Catch",
+            "errorName": "Unauthorized",
+            "variableName": "error"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "username",
+            "type": "string"
+          },
+          {
+            "name": "pwd",
+            "type": "string"
+          },
+          {
+            "name": "user",
+            "type": "HelpDeskService.User"
+          },
+          {
+            "name": "argsLogin",
+            "type": "HelpDeskService.ArgsLoginUser"
+          },
+          {
+            "name": "error",
+            "type": "any"
+          }
+        ]
+      },
+      "name": "btnSignIn_click"
+    }
+  ],
+  "model": [],
+  "root": {
+    "alignItems": "center",
+    "children": [
+      {
+        "children": [
+          {
+            "align": "center",
+            "color": "default",
+            "cssClass": "inherit-width",
+            "icon": "logo-big.png",
+            "name": "icon2",
+            "size": "xx-large",
+            "widget": "Icon"
+          },
+          {
+            "align": "center",
+            "bold": true,
+            "color": "default",
+            "name": "label1",
+            "size": "large",
+            "text": "Help Desk",
+            "widget": "Label"
+          },
+          {
+            "label": "Usuario",
+            "mandatory": true,
+            "name": "txtUsername",
+            "widget": "TextBox"
+          },
+          {
+            "label": "Contraseña",
+            "mandatory": true,
+            "name": "txtPassword",
+            "secure": true,
+            "widget": "TextBox"
+          },
+          {
+            "align": "center",
+            "color": "primary",
+            "name": "btnSignIn",
+            "submit": true,
+            "text": "Iniciar Sesión",
+            "widget": "Button"
+          }
+        ],
+        "cssClass": "blz-padding-top-large blz-padding-right-large blz-padding-left-large blz-padding-bottom-large blz-border-top blz-border-right blz-border-left blz-border-bottom blz-border-radius",
+        "layout": "container",
+        "size": "third"
+      }
+    ],
+    "cssClass": "blz-padding-top-large blz-area-default",
+    "layout": "container"
+  },
+  "routing": {
+    "path": "/login"
+  },
+  "unused": [
+    {
+      "__internalName": "autocomplete1",
+      "name": "autocomplete1",
+      "widget": "Autocomplete"
+    },
+    {
+      "__internalName": "icon1",
+      "align": "center",
+      "attribute": {
+        "color": "default",
+        "icon": "logo-big.png",
+        "name": "icon1",
+        "size": "xx-large"
+      },
+      "color": "default",
+      "icon": "logo-big.png",
+      "name": "icon1",
+      "size": "xx-large",
+      "widget": "Icon"
+    },
+    {
+      "__internalName": "htmlrenderer1",
+      "htmlTemplate": "<img src=\"./icons/logo-big.png\" style=\"width: inherit;\">",
+      "name": "htmlrenderer1",
+      "size": "third",
+      "widget": "HtmlRenderer"
+    }
+  ]
+}

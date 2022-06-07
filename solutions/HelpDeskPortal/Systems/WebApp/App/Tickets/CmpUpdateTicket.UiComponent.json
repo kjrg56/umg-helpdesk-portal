@@ -15,6 +15,11 @@
             "variableName": "listUsers"
           },
           {
+            "command": "Set",
+            "expression": "FindAll(listUsers, userRole == \"Technician\")",
+            "variableName": "listUsers"
+          },
+          {
             "command": "Load",
             "expression": "Map(listCategories, [id, name])",
             "widgetName": "cmbCategory"

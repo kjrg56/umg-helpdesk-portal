@@ -1,0 +1,127 @@
+{
+  "eventsAndFunctions": [
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "Refresh",
+            "widgetName": "repeater1"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": []
+      },
+      "name": "main_init"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "args",
+            "type": "ArgsLoadRecords"
+          }
+        ],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "GetCurrentUser()",
+            "variableName": "user"
+          },
+          {
+            "command": "Set",
+            "expression": "HelpDeskService.ListNotificationsByUserId(user.id, {})",
+            "variableName": "notifications"
+          },
+          {
+            "command": "Return",
+            "expression": "notifications"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "notifications",
+            "type": "list(HelpDeskService.Notification)"
+          },
+          {
+            "name": "user",
+            "type": "HelpDeskService.User"
+          }
+        ]
+      },
+      "name": "repeater1_loadRecords"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "recordRef",
+            "type": "string"
+          }
+        ],
+        "statements": [
+          {
+            "command": "ReadRecord",
+            "expressionRecordRef": "recordRef",
+            "variableName": "notification",
+            "widgetName": "repeater1"
+          },
+          {
+            "command": "Set",
+            "expression": "HelpDeskService.GetTicketById(notification.ticketId)",
+            "variableName": "ticket"
+          },
+          {
+            "command": "Navigate",
+            "expressionStartModel": "{ticket: ticket, ticketId: notification.ticketId}",
+            "uiComponentName": "CmpTicketDetail"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "notification",
+            "type": "HelpDeskService.Notification"
+          },
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.Ticket"
+          }
+        ]
+      },
+      "name": "repeater1_selectRecord"
+    }
+  ],
+  "model": [],
+  "root": {
+    "alignItems": "center",
+    "children": [
+      {
+        "children": [
+          {
+            "name": "repeater1",
+            "pageSize": 10,
+            "typeName": "HelpDeskService.Notification",
+            "uiComponentBinding": {
+              "notification": "{record}"
+            },
+            "uiComponentName": "CmpCardNotification",
+            "widget": "Repeater",
+            "withPaging": true
+          }
+        ],
+        "cssClass": "blz-padding-right-large blz-padding-left-large",
+        "layout": "container"
+      }
+    ],
+    "cssClass": "blz-area-default",
+    "icon": "notification.svg",
+    "layout": "container",
+    "title": "Notificaciones"
+  },
+  "routing": {
+    "path": "/notifications"
+  },
+  "unused": []
+}

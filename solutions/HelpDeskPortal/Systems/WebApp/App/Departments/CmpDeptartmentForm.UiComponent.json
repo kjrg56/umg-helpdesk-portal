@@ -1,0 +1,33 @@
+{
+  "eventsAndFunctions": [],
+  "model": [
+    {
+      "name": "department",
+      "required": false,
+      "type": "HelpDeskService.Department"
+    }
+  ],
+  "root": {
+    "children": [
+      {
+        "binding": "department.name",
+        "label": "Nombre",
+        "mandatory": true,
+        "name": "txtName",
+        "widget": "TextBox"
+      },
+      {
+        "binding": "department.description",
+        "label": "Descripcion",
+        "mandatory": true,
+        "name": "txtDesc",
+        "rows": 5,
+        "widget": "TextArea"
+      }
+    ],
+    "cssClass": "blz-area-default",
+    "layout": "container"
+  },
+  "routing": null,
+  "unused": []
+}

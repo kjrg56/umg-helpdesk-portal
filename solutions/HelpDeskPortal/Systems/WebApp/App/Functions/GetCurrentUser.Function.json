@@ -3,18 +3,33 @@
     "parameters": [],
     "statements": [
       {
-        "command": "Set",
-        "expression": "{}",
-        "variableName": "user"
+        "command": "ReadLocalStorage",
+        "localStorageVariableName": "\"user\"",
+        "variableName": "userData"
       },
       {
-        "command": "Set",
-        "expression": "\"1\"",
-        "variableName": "user.id"
+        "children": [
+          {
+            "command": "Set",
+            "expression": "JsonParse(userData)",
+            "variableName": "user"
+          },
+          {
+            "command": "Return",
+            "expression": "user"
+          }
+        ],
+        "command": "If",
+        "expression": "!IsNullOrEmpty(userData)"
       },
       {
-        "command": "Return",
-        "expression": "user"
+        "children": [
+          {
+            "command": "Return",
+            "expression": "null"
+          }
+        ],
+        "command": "Else"
       }
     ],
     "typeReturn": "HelpDeskService.User",
@@ -22,6 +37,10 @@
       {
         "name": "user",
         "type": "HelpDeskService.User"
+      },
+      {
+        "name": "userData",
+        "type": "string"
       }
     ]
   },

@@ -1,0 +1,23 @@
+{
+  "algorithm": {
+    "parameters": [],
+    "statements": [],
+    "typeReturn": "list(TicketsByDays)",
+    "variables": []
+  },
+  "routing": {
+    "method": "GET",
+    "parameters": [],
+    "path": "/tickets/analyticsByDays",
+    "remarks": "List tickets",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK"
+      }
+    ],
+    "tags": [
+      "tickets"
+    ]
+  }
+}

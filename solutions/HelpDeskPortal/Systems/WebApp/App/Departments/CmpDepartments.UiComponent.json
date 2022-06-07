@@ -1,11 +1,232 @@
 {
-  "eventsAndFunctions": [],
+  "eventsAndFunctions": [
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "args",
+            "type": "ArgsLoadRecords"
+          }
+        ],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "{offset: args.offset, limit: args.limit}",
+            "variableName": "args2"
+          },
+          {
+            "command": "Return",
+            "expression": "HelpDeskService.ListDepartments(args2)"
+          }
+        ],
+        "typeReturn": "list(any)",
+        "variables": [
+          {
+            "name": "args2",
+            "type": "HelpDeskService.ArgsListDepartments"
+          }
+        ]
+      },
+      "name": "grid1_loadRecords"
+    },
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "Refresh",
+            "widgetName": "grid1"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": []
+      },
+      "name": "main_init"
+    },
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "{}",
+            "variableName": "creation"
+          },
+          {
+            "buttons": "ok-cancel",
+            "command": "Open",
+            "expressionIcon": "\"add.svg\"",
+            "expressionStartModel": "{}",
+            "expressionTitle": "\"Crear departamento\"",
+            "mode": "window",
+            "size": "default",
+            "uiComponentName": "CmpDeptartmentForm"
+          },
+          {
+            "children": [
+              {
+                "command": "Set",
+                "expression": "model.department.name",
+                "variableName": "creation.name"
+              },
+              {
+                "command": "Set",
+                "expression": "model.department.description",
+                "variableName": "creation.description"
+              },
+              {
+                "command": "Execute",
+                "expression": "HelpDeskService.CreateDepartment(creation)"
+              },
+              {
+                "command": "Refresh",
+                "widgetName": "grid1"
+              },
+              {
+                "command": "CloseCurrent"
+              }
+            ],
+            "command": "OnOk",
+            "variableNameOpenedModel": "model"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "model",
+            "type": "any"
+          },
+          {
+            "name": "creation",
+            "type": "HelpDeskService.DepartmentCreation"
+          }
+        ]
+      },
+      "name": "grid1_handlerAction_create"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "recordRef",
+            "type": "string"
+          },
+          {
+            "name": "arg",
+            "type": "string"
+          }
+        ],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "{}",
+            "variableName": "update"
+          },
+          {
+            "command": "ReadRecord",
+            "expressionRecordRef": "recordRef",
+            "variableName": "depto",
+            "widgetName": "grid1"
+          },
+          {
+            "buttons": "ok-cancel",
+            "command": "Open",
+            "expressionIcon": "\"edit.svg\"",
+            "expressionStartModel": "{department: depto}",
+            "expressionTitle": "\"Editar departamento\"",
+            "mode": "window",
+            "size": "default",
+            "uiComponentName": "CmpDeptartmentForm"
+          },
+          {
+            "children": [
+              {
+                "command": "Set",
+                "expression": "model.department.name",
+                "variableName": "update.name"
+              },
+              {
+                "command": "Set",
+                "expression": "model.department.description",
+                "variableName": "update.description"
+              },
+              {
+                "command": "Execute",
+                "expression": "HelpDeskService.UpdateDepartment(depto.id, update)"
+              },
+              {
+                "command": "Refresh",
+                "widgetName": "grid1"
+              },
+              {
+                "command": "CloseCurrent"
+              }
+            ],
+            "command": "OnOk",
+            "variableNameOpenedModel": "model"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "model",
+            "type": "any"
+          },
+          {
+            "name": "update",
+            "type": "HelpDeskService.DepartmentUpdate"
+          },
+          {
+            "name": "depto",
+            "type": "HelpDeskService.Department"
+          }
+        ]
+      },
+      "name": "grid1_handlerRecordAction_update"
+    }
+  ],
   "model": [],
   "root": {
     "children": [
       {
-        "name": "label1",
-        "widget": "Label"
+        "actions": [
+          {
+            "color": "primary",
+            "icon": "add.svg",
+            "key": "create",
+            "text": "Nuevo"
+          }
+        ],
+        "columns": [
+          {
+            "align": "left",
+            "bindText": "id",
+            "header": "ID",
+            "key": "id"
+          },
+          {
+            "align": "left",
+            "bindText": "name",
+            "header": "Nombre",
+            "key": "name"
+          },
+          {
+            "align": "left",
+            "bindText": "description",
+            "header": "Descripcion",
+            "key": "description"
+          }
+        ],
+        "name": "grid1",
+        "recordActions": [
+          {
+            "icon": "edit.svg",
+            "key": "update",
+            "text": "Editar"
+          }
+        ],
+        "typeName": "HelpDeskService.Department",
+        "widget": "Grid"
       }
     ],
     "cssClass": "blz-area-default",

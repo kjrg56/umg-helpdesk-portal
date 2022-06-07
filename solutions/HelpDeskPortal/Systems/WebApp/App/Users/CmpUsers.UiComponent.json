@@ -1,11 +1,292 @@
 {
-  "eventsAndFunctions": [],
+  "eventsAndFunctions": [
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "Refresh",
+            "widgetName": "grid1"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": []
+      },
+      "name": "main_init"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "args",
+            "type": "ArgsLoadRecords"
+          }
+        ],
+        "statements": [
+          {
+            "command": "Return",
+            "expression": "HelpDeskService.ListUsers({offset: args.offset, limit: args.limit})"
+          }
+        ],
+        "typeReturn": "list(any)",
+        "variables": []
+      },
+      "name": "grid1_loadRecords"
+    },
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "{}",
+            "variableName": "creation"
+          },
+          {
+            "buttons": "ok-cancel",
+            "command": "Open",
+            "expressionIcon": "\"add.svg\"",
+            "expressionStartModel": "{}",
+            "expressionTitle": "\"Crear usuario\"",
+            "mode": "window",
+            "size": "default",
+            "uiComponentName": "CmpUserForm"
+          },
+          {
+            "children": [
+              {
+                "command": "Set",
+                "expression": "model.user.dateOfBirth",
+                "variableName": "creation.dateOfBirth"
+              },
+              {
+                "command": "Set",
+                "expression": "model.user.department.id",
+                "variableName": "creation.departmentId"
+              },
+              {
+                "command": "Set",
+                "expression": "model.user.email",
+                "variableName": "creation.email"
+              },
+              {
+                "command": "Set",
+                "expression": "model.user.fullName",
+                "variableName": "creation.fullName"
+              },
+              {
+                "command": "Set",
+                "expression": "model.user.passwd",
+                "variableName": "creation.passwd"
+              },
+              {
+                "command": "Set",
+                "expression": "model.user.userRole",
+                "variableName": "creation.userRole"
+              },
+              {
+                "command": "Set",
+                "expression": "model.user.username",
+                "variableName": "creation.username"
+              },
+              {
+                "command": "Set",
+                "expression": "model.pwd",
+                "variableName": "creation.passwd"
+              },
+              {
+                "command": "Execute",
+                "expression": "HelpDeskService.CreateUser(creation)"
+              },
+              {
+                "command": "CloseCurrent"
+              },
+              {
+                "command": "Refresh",
+                "widgetName": "grid1"
+              }
+            ],
+            "command": "OnOk",
+            "variableNameOpenedModel": "model"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "model",
+            "type": "any"
+          },
+          {
+            "name": "creation",
+            "type": "HelpDeskService.UserCreation"
+          }
+        ]
+      },
+      "name": "grid1_handlerAction_crear"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "recordRef",
+            "type": "string"
+          },
+          {
+            "name": "arg",
+            "type": "string"
+          }
+        ],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "{}",
+            "variableName": "creation"
+          },
+          {
+            "command": "ReadRecord",
+            "expressionRecordRef": "recordRef",
+            "variableName": "user",
+            "widgetName": "grid1"
+          },
+          {
+            "buttons": "ok-cancel",
+            "command": "Open",
+            "expressionIcon": "\"add.svg\"",
+            "expressionStartModel": "{user: user}",
+            "expressionTitle": "\"Crear usuario\"",
+            "mode": "window",
+            "size": "default",
+            "uiComponentName": "CmpUserForm"
+          },
+          {
+            "children": [
+              {
+                "command": "Set",
+                "expression": "model.user.dateOfBirth",
+                "variableName": "creation.dateOfBirth"
+              },
+              {
+                "command": "Set",
+                "expression": "model.user.department.id",
+                "variableName": "creation.departmentId"
+              },
+              {
+                "command": "Set",
+                "expression": "model.user.email",
+                "variableName": "creation.email"
+              },
+              {
+                "command": "Set",
+                "expression": "model.user.fullName",
+                "variableName": "creation.fullName"
+              },
+              {
+                "command": "Set",
+                "expression": "model.user.userRole",
+                "variableName": "creation.userRole"
+              },
+              {
+                "command": "Execute",
+                "expression": "HelpDeskService.UpdateUser(user.id, creation)"
+              },
+              {
+                "command": "CloseCurrent"
+              },
+              {
+                "command": "Refresh",
+                "widgetName": "grid1"
+              }
+            ],
+            "command": "OnOk",
+            "variableNameOpenedModel": "model"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "model",
+            "type": "any"
+          },
+          {
+            "name": "creation",
+            "type": "HelpDeskService.UserUpdate"
+          },
+          {
+            "name": "user",
+            "type": "HelpDeskService.User"
+          }
+        ]
+      },
+      "name": "grid1_handlerRecordAction_edit"
+    }
+  ],
   "model": [],
   "root": {
     "children": [
       {
-        "name": "label1",
-        "widget": "Label"
+        "actions": [
+          {
+            "color": "primary",
+            "icon": "add.svg",
+            "key": "crear",
+            "text": "Nuevo"
+          }
+        ],
+        "columns": [
+          {
+            "align": "left",
+            "bindText": "id",
+            "header": "ID",
+            "key": "id"
+          },
+          {
+            "align": "left",
+            "bindText": "username",
+            "header": "Nombre de Usuario",
+            "key": "username"
+          },
+          {
+            "align": "left",
+            "bindText": "fullName",
+            "header": "Nombre",
+            "key": "fullName"
+          },
+          {
+            "align": "left",
+            "bindText": "email",
+            "header": "Email",
+            "key": "email"
+          },
+          {
+            "align": "left",
+            "bindText": "dateOfBirth",
+            "format": "Date",
+            "header": "Fecha Nac.",
+            "key": "date"
+          },
+          {
+            "align": "left",
+            "bindText": "userRole",
+            "header": "Rol",
+            "key": "role"
+          },
+          {
+            "align": "left",
+            "bindText": "department.name",
+            "header": "Departamento",
+            "key": "depto"
+          }
+        ],
+        "name": "grid1",
+        "recordActions": [
+          {
+            "icon": "edit.svg",
+            "key": "edit",
+            "text": "Editar"
+          }
+        ],
+        "typeName": "HelpDeskService.User",
+        "widget": "Grid"
       }
     ],
     "cssClass": "blz-area-default",

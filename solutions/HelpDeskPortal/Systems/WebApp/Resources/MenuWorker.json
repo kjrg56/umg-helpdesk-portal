@@ -1,0 +1,14 @@
+[
+  {
+    "children": [],
+    "icon": "ticket.svg",
+    "text": "Tickets",
+    "uiComponentName": "CmpTickets"
+  },
+  {
+    "children": [],
+    "icon": "notification.svg",
+    "text": "Notifications",
+    "uiComponentName": "CmpNotifications"
+  }
+]

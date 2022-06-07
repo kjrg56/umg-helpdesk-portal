@@ -1,0 +1,7 @@
+.inherit-width .image-container img {
+ 	width: inherit; 
+}
+
+.cusor-pointer {
+	cursor: pointer;
+}

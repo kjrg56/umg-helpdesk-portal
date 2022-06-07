@@ -1,0 +1,23 @@
+{
+  "algorithm": {
+    "parameters": [],
+    "statements": [],
+    "typeReturn": "list(TicketsByUser)",
+    "variables": []
+  },
+  "routing": {
+    "method": "GET",
+    "parameters": [],
+    "path": "/tickets/analyticsByUsers",
+    "remarks": "List tickets",
+    "responses": [
+      {
+        "httpStatus": "202",
+        "remarks": "OK"
+      }
+    ],
+    "tags": [
+      "tickets"
+    ]
+  }
+}
