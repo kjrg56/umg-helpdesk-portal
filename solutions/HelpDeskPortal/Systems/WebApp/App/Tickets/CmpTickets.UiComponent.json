@@ -52,7 +52,7 @@
               }
             ],
             "command": "If",
-            "expression": "user.userRole != \"Manager\" || user.userRole != \"Admin\""
+            "expression": "user.userRole != \"Manager\" && user.userRole != \"Admin\""
           },
           {
             "command": "Set",
@@ -278,8 +278,13 @@
             "variableName": "ticket"
           },
           {
+            "command": "Set",
+            "expression": "GetCurrentUser()",
+            "variableName": "user"
+          },
+          {
             "command": "Return",
-            "expression": "ticket.status != \"Closed\""
+            "expression": "ticket.status != \"Closed\" && (user.id == ticket.userCreated.id || user.userRole == \"Admin\")"
           }
         ],
         "typeReturn": "boolean",
@@ -287,6 +292,10 @@
           {
             "name": "ticket",
             "type": "HelpDeskService.Ticket"
+          },
+          {
+            "name": "user",
+            "type": "HelpDeskService.User"
           }
         ]
       },
@@ -377,6 +386,44 @@
         ]
       },
       "name": "grid1_handlerRecordAction_delete"
+    },
+    {
+      "algorithm": {
+        "parameters": [
+          {
+            "name": "recordData",
+            "type": "any"
+          }
+        ],
+        "statements": [
+          {
+            "command": "Set",
+            "expression": "recordData",
+            "variableName": "ticket"
+          },
+          {
+            "command": "Set",
+            "expression": "GetCurrentUser()",
+            "variableName": "user"
+          },
+          {
+            "command": "Return",
+            "expression": "user.id == ticket.userCreated.id || user.userRole == \"Admin\""
+          }
+        ],
+        "typeReturn": "boolean",
+        "variables": [
+          {
+            "name": "user",
+            "type": "HelpDeskService.User"
+          },
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.Ticket"
+          }
+        ]
+      },
+      "name": "grid1_visibilityRecordAction_delete"
     },
     {
       "algorithm": {

@@ -10,6 +10,11 @@
             "variableName": "ticket"
           },
           {
+            "command": "Set",
+            "expression": "GetCurrentUser()",
+            "variableName": "user"
+          },
+          {
             "command": "SetTitle",
             "expression": "\"Ticket #\" + ConvertToString(ticket.id)",
             "widgetName": "mainContainer"
@@ -97,10 +102,46 @@
                 "command": "HideAction",
                 "expressionActionKey": "\"createComment\"",
                 "widgetName": "containerComments"
+              },
+              {
+                "children": [
+                  {
+                    "command": "ShowAction",
+                    "expressionActionKey": "\"reopen\"",
+                    "widgetName": "containerComments"
+                  }
+                ],
+                "command": "If",
+                "expression": "user.id == ticket.userCreated.id"
+              },
+              {
+                "children": [
+                  {
+                    "command": "HideAction",
+                    "expressionActionKey": "\"reopen\"",
+                    "widgetName": "containerComments"
+                  }
+                ],
+                "command": "Else"
               }
             ],
             "command": "If",
             "expression": "ticket.status == \"Closed\""
+          },
+          {
+            "children": [
+              {
+                "command": "HideAction",
+                "expressionActionKey": "\"reopen\"",
+                "widgetName": "containerComments"
+              },
+              {
+                "command": "ShowAction",
+                "expressionActionKey": "\"createComment\"",
+                "widgetName": "containerComments"
+              }
+            ],
+            "command": "Else"
           },
           {
             "command": "Refresh",
@@ -112,6 +153,10 @@
           {
             "name": "ticket",
             "type": "HelpDeskService.Ticket"
+          },
+          {
+            "name": "user",
+            "type": "HelpDeskService.User"
           }
         ]
       },
@@ -205,6 +250,57 @@
         ]
       },
       "name": "containerComments_handlerAction_createComment"
+    },
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "ReadModel",
+            "modelVariableName": "ticket",
+            "variableName": "ticket"
+          },
+          {
+            "command": "ConfirmMessage",
+            "expressionMessage": "\"Está seguro que desea reabrir el ticket?\"",
+            "expressionTitle": "\"Reabrir Ticket\""
+          },
+          {
+            "children": [
+              {
+                "command": "Set",
+                "expression": "{status: \"Assigned\", userAssignedId: ticket.userAssigned.id}",
+                "variableName": "update"
+              },
+              {
+                "command": "Execute",
+                "expression": "HelpDeskService.UpdateTicket(ticket.id, update)"
+              },
+              {
+                "command": "Execute",
+                "expression": "refreshTicketData(ticket.id)"
+              },
+              {
+                "command": "Refresh",
+                "widgetName": "repeaterComments"
+              }
+            ],
+            "command": "OnYes"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.Ticket"
+          },
+          {
+            "name": "update",
+            "type": "HelpDeskService.TicketUpdate"
+          }
+        ]
+      },
+      "name": "containerComments_handlerAction_reopen"
     },
     {
       "algorithm": {
@@ -419,6 +515,24 @@
                   }
                 ],
                 "layout": "container"
+              },
+              {
+                "children": [
+                  {
+                    "bold": true,
+                    "color": "default",
+                    "name": "lblDescription",
+                    "text": "Descripción",
+                    "widget": "Label"
+                  },
+                  {
+                    "binding": "ticket.description",
+                    "color": "default",
+                    "name": "field7",
+                    "widget": "Field"
+                  }
+                ],
+                "layout": "container"
               }
             ],
             "layout": "container",
@@ -431,6 +545,12 @@
                 "icon": "add.svg",
                 "key": "createComment",
                 "text": "Nuevo"
+              },
+              {
+                "color": "primary",
+                "icon": "execute.svg",
+                "key": "reopen",
+                "text": "Reabrir"
               }
             ],
             "children": [

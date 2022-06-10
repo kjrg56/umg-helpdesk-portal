@@ -120,15 +120,6 @@
     },
     {
       "algorithm": {
-        "parameters": [],
-        "statements": [],
-        "typeReturn": "any",
-        "variables": []
-      },
-      "name": "main_activate"
-    },
-    {
-      "algorithm": {
         "parameters": [
           {
             "name": "args",
@@ -154,12 +145,6 @@
         "children": [
           {
             "align": "center",
-            "attribute": {
-              "bold": true,
-              "color": "default",
-              "name": "lblTitle",
-              "text": "Sistema de Gestión de Tickets"
-            },
             "bold": true,
             "color": "default",
             "name": "lblTitle",
@@ -169,11 +154,6 @@
           },
           {
             "align": "center",
-            "attribute": {
-              "color": "default",
-              "name": "lblName",
-              "text": "Help Desk"
-            },
             "color": "default",
             "name": "lblName",
             "size": "x-large",
@@ -185,16 +165,12 @@
         "layout": "container"
       },
       {
+        "alignItems": "center",
         "children": [
           {
             "children": [
               {
                 "align": "center",
-                "attribute": {
-                  "bold": true,
-                  "color": "default",
-                  "name": "fieldNumPending"
-                },
                 "bold": true,
                 "color": "default",
                 "name": "fieldNumPending",
@@ -203,10 +179,6 @@
               },
               {
                 "align": "center",
-                "attribute": {
-                  "color": "default",
-                  "name": "fieldPending"
-                },
                 "color": "default",
                 "name": "fieldPending",
                 "size": "x-large",
@@ -222,11 +194,6 @@
             "children": [
               {
                 "align": "center",
-                "attribute": {
-                  "bold": true,
-                  "color": "default",
-                  "name": "fieldNumAssign"
-                },
                 "bold": true,
                 "color": "default",
                 "name": "fieldNumAssign",
@@ -235,17 +202,13 @@
               },
               {
                 "align": "center",
-                "attribute": {
-                  "color": "default",
-                  "name": "fieldAssign"
-                },
                 "color": "default",
                 "name": "fieldAssign",
                 "size": "x-large",
                 "widget": "Field"
               }
             ],
-            "cssClass": "blz-padding-top-large blz-border-top blz-border-right blz-border-left blz-border-bottom blz-border-radius blz-cast-shadow blz-area-warning",
+            "cssClass": "blz-area-warning blz-padding-top-large blz-border-top blz-border-right blz-border-left blz-border-bottom blz-border-radius blz-cast-shadow",
             "height": 150,
             "layout": "container",
             "size": "quarter"
@@ -254,11 +217,6 @@
             "children": [
               {
                 "align": "center",
-                "attribute": {
-                  "bold": true,
-                  "color": "default",
-                  "name": "fieldNumProgress"
-                },
                 "bold": true,
                 "color": "default",
                 "name": "fieldNumProgress",
@@ -267,17 +225,13 @@
               },
               {
                 "align": "center",
-                "attribute": {
-                  "color": "default",
-                  "name": "fieldProgress"
-                },
                 "color": "default",
                 "name": "fieldProgress",
                 "size": "x-large",
                 "widget": "Field"
               }
             ],
-            "cssClass": "blz-padding-top-large blz-border-top blz-border-right blz-border-left blz-border-bottom blz-border-radius blz-cast-shadow blz-area-error",
+            "cssClass": "blz-area-error blz-padding-top-large blz-border-top blz-border-right blz-border-left blz-border-bottom blz-border-radius blz-cast-shadow",
             "height": 150,
             "layout": "container",
             "size": "quarter"
@@ -286,11 +240,6 @@
             "children": [
               {
                 "align": "center",
-                "attribute": {
-                  "bold": true,
-                  "color": "default",
-                  "name": "fieldNumClosed"
-                },
                 "bold": true,
                 "color": "default",
                 "name": "fieldNumClosed",
@@ -299,20 +248,164 @@
               },
               {
                 "align": "center",
-                "attribute": {
-                  "color": "default",
-                  "name": "fieldClosed"
-                },
                 "color": "default",
                 "name": "fieldClosed",
                 "size": "x-large",
                 "widget": "Field"
               }
             ],
-            "cssClass": "blz-padding-top-large blz-border-top blz-border-right blz-border-left blz-border-bottom blz-border-radius blz-cast-shadow blz-area-info",
+            "cssClass": "blz-area-info blz-padding-top-large blz-border-top blz-border-right blz-border-left blz-border-bottom blz-border-radius blz-cast-shadow",
             "height": 150,
             "layout": "container",
             "size": "quarter"
+          }
+        ],
+        "horizontalSeparation": "large",
+        "layout": "container"
+      },
+      {
+        "alignItems": "center",
+        "children": [
+          {
+            "children": [
+              {
+                "config": {
+                  "colors": {
+                    "step": 2
+                  },
+                  "data": [
+                    {
+                      "category": "Abril",
+                      "first": 1520
+                    },
+                    {
+                      "category": "Mayo",
+                      "first": 1875
+                    },
+                    {
+                      "category": "Junio",
+                      "first": 400
+                    }
+                  ],
+                  "legend": {
+                    "labels": {
+                      "maxWidth": 95
+                    },
+                    "paddingBottom": 20,
+                    "position": "top",
+                    "type": "Legend"
+                  },
+                  "series": [
+                    {
+                      "bullet": [
+                        {
+                          "dy": 30,
+                          "interactionsEnabled": false,
+                          "label": {
+                            "fill": "#ffffff",
+                            "text": "{valueY}"
+                          },
+                          "type": "LabelBullet"
+                        }
+                      ],
+                      "dataFields": {
+                        "categoryX": "category",
+                        "valueY": "first"
+                      },
+                      "events": {
+                        "on": [
+                          "shown",
+                          "arrangeColumns()"
+                        ]
+                      },
+                      "name": "Horas",
+                      "tooltip": {
+                        "pointerOrientation": "vertical"
+                      },
+                      "tooltipText": "[{category}: bold]{first}[/]",
+                      "type": "ColumnSeries"
+                    }
+                  ],
+                  "type": "XYChart",
+                  "xAxes": [
+                    {
+                      "dataFields": {
+                        "category": "category"
+                      },
+                      "renderer": {
+                        "cellEndLocation": 0.9,
+                        "cellStartLocation": 0.1,
+                        "grid": {
+                          "location": 0
+                        }
+                      },
+                      "type": "CategoryAxis"
+                    }
+                  ],
+                  "yAxes": [
+                    {
+                      "min": 0,
+                      "type": "ValueAxis"
+                    }
+                  ]
+                },
+                "height": 400,
+                "name": "amchart1",
+                "widget": "AmChart"
+              }
+            ],
+            "cssClass": "blz-padding-top-large blz-padding-right-large blz-padding-left-large blz-padding-bottom-large blz-border-top blz-border-right blz-border-left blz-border-bottom blz-border-radius blz-cast-shadow blz-area-default",
+            "layout": "container",
+            "size": "half",
+            "title": "Rendimiento por mes"
+          },
+          {
+            "children": [
+              {
+                "config": {
+                  "data": [
+                    {
+                      "country": "Desarrollo",
+                      "litres": 18
+                    },
+                    {
+                      "country": "Soporte Técnico",
+                      "litres": 25
+                    },
+                    {
+                      "country": "Redes",
+                      "litres": 5
+                    },
+                    {
+                      "country": "Telefonía",
+                      "litres": 2
+                    }
+                  ],
+                  "legend": {
+                    "valueLabels": {
+                      "text": "{value.value}"
+                    }
+                  },
+                  "series": [
+                    {
+                      "dataFields": {
+                        "category": "country",
+                        "value": "litres"
+                      },
+                      "type": "PieSeries3D"
+                    }
+                  ],
+                  "type": "PieChart3D"
+                },
+                "height": 400,
+                "name": "amchart2",
+                "widget": "AmChart"
+              }
+            ],
+            "cssClass": "blz-padding-top-large blz-padding-right-large blz-padding-left-large blz-padding-bottom-large blz-border-top blz-border-right blz-border-left blz-border-bottom blz-border-radius blz-cast-shadow blz-area-default",
+            "layout": "container",
+            "size": "half",
+            "title": "Tickets por Categoria"
           }
         ],
         "horizontalSeparation": "large",
@@ -327,5 +420,126 @@
   "routing": {
     "path": "/dashboard"
   },
-  "unused": []
+  "unused": [
+    {
+      "__internalName": "amchart3",
+      "config": {
+        "colors": {
+          "step": 2
+        },
+        "data": [
+          {
+            "category": "March",
+            "first": 7416179.3118,
+            "second": 741617931.18,
+            "third": 16915468
+          },
+          {
+            "category": "April",
+            "first": 7020606.0863,
+            "second": 702060608.63,
+            "third": 16898740
+          },
+          {
+            "category": "May",
+            "first": 6826396.2801,
+            "second": 682639628.01,
+            "third": 16662807
+          }
+        ],
+        "legend": {
+          "labels": {
+            "maxWidth": 95
+          },
+          "paddingBottom": 20,
+          "position": "top",
+          "type": "Legend"
+        },
+        "series": [
+          {
+            "bullet": [
+              {
+                "dy": 30,
+                "interactionsEnabled": false,
+                "label": {
+                  "fill": "#ffffff",
+                  "text": "{valueY}"
+                },
+                "type": "LabelBullet"
+              }
+            ],
+            "dataFields": {
+              "categoryX": "category",
+              "valueY": "first"
+            },
+            "events": {
+              "on": [
+                "shown",
+                "arrangeColumns()"
+              ]
+            },
+            "name": "Euros (in hundreds)",
+            "tooltip": {
+              "pointerOrientation": "vertical"
+            },
+            "tooltipText": "[{category}: bold]{first}[/]",
+            "type": "ColumnSeries"
+          },
+          {
+            "bullet": [
+              {
+                "dy": 30,
+                "interactionsEnabled": false,
+                "label": {
+                  "fill": "#ffffff",
+                  "text": "{valueY}"
+                },
+                "type": "LabelBullet"
+              }
+            ],
+            "dataFields": {
+              "categoryX": "category",
+              "valueY": "third"
+            },
+            "events": {
+              "on": [
+                "shown",
+                "arrangeColumns()"
+              ]
+            },
+            "name": "Clients",
+            "tooltip": {
+              "pointerOrientation": "vertical"
+            },
+            "tooltipText": "[{category}: bold]{third}[/]",
+            "type": "ColumnSeries"
+          }
+        ],
+        "type": "XYChart",
+        "xAxes": [
+          {
+            "dataFields": {
+              "category": "category"
+            },
+            "renderer": {
+              "cellEndLocation": 0.9,
+              "cellStartLocation": 0.1,
+              "grid": {
+                "location": 0
+              }
+            },
+            "type": "CategoryAxis"
+          }
+        ],
+        "yAxes": [
+          {
+            "min": 0,
+            "type": "ValueAxis"
+          }
+        ]
+      },
+      "name": "amchart3",
+      "widget": "AmChart"
+    }
+  ]
 }

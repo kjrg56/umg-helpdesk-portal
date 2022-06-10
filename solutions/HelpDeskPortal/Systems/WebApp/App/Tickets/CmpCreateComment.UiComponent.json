@@ -44,6 +44,11 @@
             "widgetName": "chkMustClose"
           },
           {
+            "command": "GetValue",
+            "variableName": "inProgress",
+            "widgetName": "chkProgress"
+          },
+          {
             "children": [
               {
                 "command": "Execute",
@@ -52,6 +57,26 @@
             ],
             "command": "If",
             "expression": "mustClose"
+          },
+          {
+            "children": [
+              {
+                "command": "Set",
+                "expression": "{}",
+                "variableName": "update"
+              },
+              {
+                "command": "Set",
+                "expression": "\"InProgress\"",
+                "variableName": "update.status"
+              },
+              {
+                "command": "Execute",
+                "expression": "HelpDeskService.UpdateTicket(ticket.id, update)"
+              }
+            ],
+            "command": "If",
+            "expression": "inProgress"
           }
         ],
         "typeReturn": "any",
@@ -75,10 +100,65 @@
           {
             "name": "mustClose",
             "type": "boolean"
+          },
+          {
+            "name": "inProgress",
+            "type": "boolean"
+          },
+          {
+            "name": "update",
+            "type": "HelpDeskService.TicketUpdate"
           }
         ]
       },
       "name": "main_submit"
+    },
+    {
+      "algorithm": {
+        "parameters": [],
+        "statements": [
+          {
+            "command": "ReadModel",
+            "modelVariableName": "ticket",
+            "variableName": "ticket"
+          },
+          {
+            "children": [
+              {
+                "command": "Show",
+                "widgetName": "chkProgress"
+              },
+              {
+                "command": "Hide",
+                "widgetName": "chkMustClose"
+              }
+            ],
+            "command": "If",
+            "expression": "ticket.status == \"Pending\" || ticket.status == \"Assigned\""
+          },
+          {
+            "children": [
+              {
+                "command": "Show",
+                "widgetName": "chkMustClose"
+              },
+              {
+                "command": "Hide",
+                "widgetName": "chkProgress"
+              }
+            ],
+            "command": "Else"
+          }
+        ],
+        "typeReturn": "any",
+        "variables": [
+          {
+            "name": "ticket",
+            "type": "HelpDeskService.Ticket"
+          }
+        ]
+      },
+      "name": "main_init"
     }
   ],
   "model": [
@@ -106,6 +186,11 @@
       {
         "label": "¿Cerrar ticket?",
         "name": "chkMustClose",
+        "widget": "CheckBox"
+      },
+      {
+        "label": "¿En Progreso?",
+        "name": "chkProgress",
         "widget": "CheckBox"
       }
     ],
